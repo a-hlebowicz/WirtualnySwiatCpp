@@ -1,3 +1,9 @@
+# 
+
+# This project is currently being rewritten in modern C++ and is undergoing gradual code modernization.
+
+# 
+
 # Wirtualny Świat
 
 Turowa symulacja ekosystemu z dziedziczeniem wirtualnym. Czysty C++, konsola Windows.
