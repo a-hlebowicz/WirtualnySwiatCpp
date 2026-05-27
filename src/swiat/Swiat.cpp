@@ -1,4 +1,5 @@
 #include"Swiat.h"
+#include"../organizmy/Czlowiek.h"
 #include"../organizmy/Trawa.h"
 #include"../organizmy/Mlecz.h"
 #include"../organizmy/Wilk.h"
@@ -31,6 +32,7 @@ Organizm* Swiat::dodajOrganizm(char symbol,int x, int y) {
 		return nullptr;
 	}
 	std::unique_ptr<Organizm> organizm;
+	if (symbol == 'X')organizm = std::make_unique <Czlowiek>(this, x, y);
 	if (symbol == 'T')organizm = std::make_unique <Trawa>(this, x, y);
 	if (symbol == 'M')organizm = std::make_unique <Mlecz>(this, x, y);
 	if (symbol == 'W')organizm = std::make_unique <Wilk>(this, x, y);
@@ -52,11 +54,13 @@ Organizm* Swiat::dodajOrganizm(char symbol,int x, int y) {
 	
 	return obs;
 }
+/*
 void Swiat::dodajCzlowieka(Organizm* organizm)
 {
 	mapaOrganizmow[organizm->getX()][organizm->getY()] = organizm;
 	listaOrganizmow.push_back(organizm);
 }
+*/
 void color(int color) {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
@@ -124,7 +128,7 @@ std::ostream& operator<<(std::ostream& out, const Swiat& swiat ) {
 }
 
 struct ktoPierwszy {
-	inline bool operator() (const Organizm* organizm1, const Organizm* organizm2) {
+	inline bool operator() (const std::unique_ptr<Organizm>& organizm1, const std::unique_ptr<Organizm>& organizm2) {
 		if (organizm1->getInicjatywa() != organizm2->getInicjatywa())
 			return (organizm1->getInicjatywa() > organizm2->getInicjatywa());
 		else return (organizm1->getWiek() > organizm2->getWiek());
@@ -134,6 +138,7 @@ struct ktoPierwszy {
 
 void Swiat::ustawSwiat()
 {
+	dodajOrganizm('X', rand() % 20, rand() % 20);
 	dodajOrganizm('W', rand() % 20, rand() % 20);
 	dodajOrganizm('W', rand() % 20, rand() % 20);
 	dodajOrganizm('O', rand() % 20, rand() % 20);
@@ -220,8 +225,8 @@ void Swiat::usunOrganizmyZListy() {
 		listaOrganizmow.remove_if([&](const std::unique_ptr<Organizm>& p) {
 			return p.get() == organizm;
 		});
-		if (organizm->getSymbol() == 'X')organizm->setSila(-1);
-		else delete organizm;
+		//if (organizm->getSymbol() == 'X')organizm->setSila(-1);
+		//else delete organizm;
 	}
 }
 
