@@ -18,7 +18,7 @@ private:
 	int szerokosc;
 	int wysokosc;
 	std::vector< std::vector< Organizm* > > mapaOrganizmow;
-	std::list<Organizm*> listaOrganizmow;
+	std::list<std::unique_ptr<Organizm>> listaOrganizmow;
 	std::queue<Organizm*> doUsuniecia;	
 	std::queue<std::string> komunikaty;
 	friend std::ostream& operator<<(std::ostream& out, const Swiat& swiat);	
@@ -31,7 +31,7 @@ public:
 	int getWysokosc() const { return wysokosc; }
 	int getTura() const { return tura; }
 	const std::vector< std::vector< Organizm* > >& getMapaOrganizmow() const { return mapaOrganizmow; }
-	const std::list <Organizm* >& getListaOrganizmow() const { return listaOrganizmow; };
+	//std::list<std::unique_ptr<Organizm>>& getListaOrganizmow() const { return listaOrganizmow; }; nikt tego i tak nie uzywa?
 	void ustawSwiat();
 	void wykonajTure();
 	Organizm* dodajOrganizm(char symbol, int x, int y);

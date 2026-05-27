@@ -21,27 +21,36 @@ Swiat::Swiat(int szerokosc, int wysokosc) {
 }
 
 Organizm* Swiat::dodajOrganizm(char symbol,int x, int y) {
-	Organizm* organizm = nullptr;
-	if (mapaOrganizmow[x][y] != nullptr)std::cout << "pole " << x << " , " << y << " jest zajete";
-	else 
-	{
-		if (symbol == 'T')organizm = new Trawa(this, x, y);
-		if (symbol == 'M')organizm = new Mlecz(this, x, y);
-		if (symbol == 'W')organizm = new Wilk(this, x, y);
-		if (symbol == 'O')organizm = new Owca(this, x, y);
-		if (symbol == 'L')organizm = new Lis(this, x, y);
-		if (symbol == 'Z')organizm = new Zolw(this, x, y);
-		if (symbol == 'A')organizm = new Antylopa(this, x, y);
-		if (symbol == 'G')organizm = new Guarana(this, x, y);
-		if (symbol == 'J')organizm = new WilczeJagody(this, x, y);
-		if (symbol == 'B')organizm = new BarszczSosnowskiego(this, x, y);
-
-		if (organizm != nullptr) {
-			mapaOrganizmow[organizm->getX()][organizm->getY()] = organizm;
-			listaOrganizmow.push_back(organizm);
-		}
+	/*
+	TODO
+	zapakowac to jakos w enuma
+	zmienic wypisaywanie cout na komunikat
+	*/
+	if (mapaOrganizmow[x][y] != nullptr) {
+		std::cout << "pole " << x << " , " << y << " jest zajete \n";
+		return nullptr;
 	}
-	return organizm;
+	std::unique_ptr<Organizm> organizm;
+	if (symbol == 'T')organizm = std::make_unique <Trawa>(this, x, y);
+	if (symbol == 'M')organizm = std::make_unique <Mlecz>(this, x, y);
+	if (symbol == 'W')organizm = std::make_unique <Wilk>(this, x, y);
+	if (symbol == 'O')organizm = std::make_unique <Owca>(this, x, y);
+	if (symbol == 'L')organizm = std::make_unique <Lis>(this, x, y);
+	if (symbol == 'Z')organizm = std::make_unique <Zolw>(this, x, y);
+	if (symbol == 'A')organizm = std::make_unique <Antylopa>(this, x, y);
+	if (symbol == 'G')organizm = std::make_unique <Guarana>(this, x, y);
+	if (symbol == 'J')organizm = std::make_unique <WilczeJagody>(this, x, y);
+	if (symbol == 'B')organizm = std::make_unique <BarszczSosnowskiego>(this, x, y);
+
+	if (organizm == nullptr) {
+		std::cout << "nie mozna stworzyc organizmu \n";
+		return nullptr;
+	}
+	Organizm* obs = organizm.get();
+	mapaOrganizmow[obs->getX()][obs->getY()] = obs;
+	listaOrganizmow.push_back(std::move(organizm));
+	
+	return obs;
 }
 void Swiat::dodajCzlowieka(Organizm* organizm)
 {
@@ -150,8 +159,8 @@ void Swiat::ustawSwiat()
 void Swiat::wykonajTure() {
 	tura++;
 	listaOrganizmow.sort(ktoPierwszy());	
-	for (Organizm* organizm : listaOrganizmow) {
-		if (mapaOrganizmow[organizm->getX()][organizm->getY()]==organizm)organizm->akcja();
+	for (const auto& organizm : listaOrganizmow) {
+		if (mapaOrganizmow[organizm->getX()][organizm->getY()]==organizm)organizm->akcja();			//TODO Mapa zmienia typ
 	}
 	usunOrganizmyZListy();
 }
