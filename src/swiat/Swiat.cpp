@@ -160,7 +160,7 @@ void Swiat::wykonajTure() {
 	tura++;
 	listaOrganizmow.sort(ktoPierwszy());	
 	for (const auto& organizm : listaOrganizmow) {
-		if (mapaOrganizmow[organizm->getX()][organizm->getY()]==organizm)organizm->akcja();			//TODO Mapa zmienia typ
+		if (mapaOrganizmow[organizm->getX()][organizm->getY()]==organizm.get())organizm->akcja();			//TODO metoda czyZyje
 	}
 	usunOrganizmyZListy();
 }
@@ -217,10 +217,9 @@ void Swiat::usunOrganizmyZListy() {
 	while (!doUsuniecia.empty()) {
 		Organizm* organizm = doUsuniecia.front();
 		doUsuniecia.pop();
-		auto it = std::find(listaOrganizmow.begin(), listaOrganizmow.end(), organizm);
-		if (it != listaOrganizmow.end()) {
-			listaOrganizmow.erase(it);
-		}
+		listaOrganizmow.remove_if([&](const std::unique_ptr<Organizm>& p) {
+			return p.get() == organizm;
+		});
 		if (organizm->getSymbol() == 'X')organizm->setSila(-1);
 		else delete organizm;
 	}
@@ -291,7 +290,7 @@ void Swiat::zapiszDoPliku() {
 	std::ofstream plik(nazwaPliku);
 	if (plik.is_open()) {
 		plik << tura << std::endl;
-		for (Organizm* organizm : listaOrganizmow) {
+		for (const auto& organizm : listaOrganizmow) {
 			plik << organizm->getSymbol() << " ";
 			plik << organizm->getX() << " " <<organizm->getY() << " ";
 			plik << organizm->getSila() << " ";

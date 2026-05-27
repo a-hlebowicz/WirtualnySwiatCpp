@@ -41,7 +41,3 @@ void Organizm::setY(int y)
 	this->polozenie.y = y;
 }
 
-Organizm::~Organizm()
-{
-	
-}

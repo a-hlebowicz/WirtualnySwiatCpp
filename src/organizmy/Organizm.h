@@ -33,7 +33,7 @@ public:
 	void setSila(int a);
 	void setX(int x);
 	void setY(int y);
-	~Organizm();
+	virtual ~Organizm() = default;
 	
 };
 
