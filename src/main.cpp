@@ -26,8 +26,11 @@ int main() {
 	while (a!='0') {
 		a=_getch();
 		if (a == 'z') { swiat.zapiszDoPliku(); continue; }
-		//if (a == 'r' && czlowiek.getUmiejetnosc()<=0) { czlowiek.aktywujUmietnosc(); a = _getch();}
-		//if (czlowiek.getSila()>0) czlowiek.setWejscie(a);
+		if (a == 'r') { 
+			swiat.czlowiekUmiejetnosc();
+			a = _getch();
+		}
+		if (swiat.czyCzlowiekZyje()) swiat.czlowiekSetWejscie(a);
 		system("cls");
 		swiat.wykonajTure();
 		cout << swiat;

@@ -51,7 +51,7 @@ Organizm* Swiat::dodajOrganizm(char symbol,int x, int y) {
 	Organizm* obs = organizm.get();
 	mapaOrganizmow[obs->getX()][obs->getY()] = obs;
 	listaOrganizmow.push_back(std::move(organizm));
-	
+	//czlowiek = listaOrganizmow.back().get();
 	return obs;
 }
 /*
@@ -286,6 +286,21 @@ koordynaty2 Swiat::znajdzWolnePole(Organizm* organizm)
 			return pole;
 		}
 	}
+}
+
+bool Swiat::czyCzlowiekZyje() {
+	if (czlowiek != nullptr)return false;
+	return true;
+}
+void Swiat::czlowiekUmiejetnosc() {
+	if (!czyCzlowiekZyje()) return;
+	if (czlowiek->getUmiejetnosc() > 0) return;
+	czlowiek->aktywujUmietnosc();
+	return;
+}
+
+void Swiat::czlowiekSetWejscie(char c) {
+	czlowiek->setWejscie(c);
 }
 void Swiat::zapiszDoPliku() {
 	std::string napis;

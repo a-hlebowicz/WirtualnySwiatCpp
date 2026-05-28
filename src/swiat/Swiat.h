@@ -11,6 +11,7 @@ struct koordynaty2 { //nie dzialalo dla zwyklych koordynatow
 	int y;
 };
 class Organizm;
+class Czlowiek;
 class Swiat
 {
 private:
@@ -22,6 +23,7 @@ private:
 	std::queue<Organizm*> doUsuniecia;	
 	std::queue<std::string> komunikaty;
 	friend std::ostream& operator<<(std::ostream& out, const Swiat& swiat);	
+	Czlowiek* czlowiek;
 public:
 	
 	Swiat(int szerokosc, int wysokosc);
@@ -53,4 +55,8 @@ public:
 	koordynaty2 znajdzWolnePole(Organizm* organizm);
 	void zapiszDoPliku();
 	void wczytajPlik(std::string& nazwaPliku, Organizm* czlowiek);
+	bool czyCzlowiekZyje();
+	void czlowiekUmiejetnosc();
+	void czlowiekSetWejscie(char c);
+
 };
