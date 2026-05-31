@@ -37,7 +37,7 @@ public:
 	void ustawSwiat();
 	void wykonajTure();
 	Organizm* dodajOrganizm(char symbol, int x, int y);
-	void dodajCzlowieka(Organizm* organizm);
+	Organizm* dodajCzlowieka(int x, int y);
 	void przestawOrganizm(Organizm* organizm,int x1, int x2);
 	void przegonOrganizm(Organizm* atakujacy, Organizm* broniacy);
 	void tarczaPrzegon(Organizm* atakujacy, Organizm* broniacy);

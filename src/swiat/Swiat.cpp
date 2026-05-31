@@ -21,6 +21,15 @@ Swiat::Swiat(int szerokosc, int wysokosc) {
 	mapaOrganizmow = std::vector< std::vector<Organizm*> >(szerokosc, std::vector<Organizm*>(wysokosc, nullptr));
 }
 
+Organizm* Swiat::dodajCzlowieka(int x, int y) {
+	std::unique_ptr<Czlowiek> czlowiek = std::make_unique <Czlowiek>(this, x, y);
+	Organizm* obs = czlowiek.get();
+	this->czlowiek = czlowiek.get();
+	mapaOrganizmow[obs->getX()][obs->getY()] = obs;
+	listaOrganizmow.push_back(std::move(czlowiek));
+	return obs;
+}
+
 Organizm* Swiat::dodajOrganizm(char symbol,int x, int y) {
 	/*
 	TODO
@@ -32,7 +41,10 @@ Organizm* Swiat::dodajOrganizm(char symbol,int x, int y) {
 		return nullptr;
 	}
 	std::unique_ptr<Organizm> organizm;
-	if (symbol == 'X')organizm = std::make_unique <Czlowiek>(this, x, y);
+	if (symbol == 'X') {
+		Organizm* obs = dodajCzlowieka(x, y);
+		return obs;
+	} 
 	if (symbol == 'T')organizm = std::make_unique <Trawa>(this, x, y);
 	if (symbol == 'M')organizm = std::make_unique <Mlecz>(this, x, y);
 	if (symbol == 'W')organizm = std::make_unique <Wilk>(this, x, y);
@@ -51,7 +63,7 @@ Organizm* Swiat::dodajOrganizm(char symbol,int x, int y) {
 	Organizm* obs = organizm.get();
 	mapaOrganizmow[obs->getX()][obs->getY()] = obs;
 	listaOrganizmow.push_back(std::move(organizm));
-	//czlowiek = listaOrganizmow.back().get();
+	
 	return obs;
 }
 /*
@@ -222,6 +234,7 @@ void Swiat::usunOrganizmyZListy() {
 	while (!doUsuniecia.empty()) {
 		Organizm* organizm = doUsuniecia.front();
 		doUsuniecia.pop();
+		if (organizm->getSymbol() == 'X') czlowiek = nullptr;
 		listaOrganizmow.remove_if([&](const std::unique_ptr<Organizm>& p) {
 			return p.get() == organizm;
 		});
@@ -289,8 +302,8 @@ koordynaty2 Swiat::znajdzWolnePole(Organizm* organizm)
 }
 
 bool Swiat::czyCzlowiekZyje() {
-	if (czlowiek != nullptr)return false;
-	return true;
+	if (czlowiek != nullptr)return true;
+	return false;
 }
 void Swiat::czlowiekUmiejetnosc() {
 	if (!czyCzlowiekZyje()) return;
