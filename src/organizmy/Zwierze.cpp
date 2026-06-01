@@ -5,20 +5,20 @@ Zwierze::Zwierze(Swiat* swiat, int x, int y, char symbol, int sila, int inicjaty
 	predkosc = 1;
 }
 
-kierunki Zwierze::wybierzKierunek()
+Kierunek Zwierze::wybierzKierunek()
 {
-	kierunki kierunek=brak;
+	Kierunek kierunek= Kierunek::brak;
 	int x1 = 0, y1 = 0, i=0;
 	while (1) {
 		if (i >= 20) {
-			return brak;
+			return Kierunek::brak;
 			std::cout << "nie znaleziono kierunku ";
 		}
 		int a = rand() % 4;
-		if (a == 0) { x1 = predkosc; y1 = 0; kierunek = prawo; }
-		if (a == 1) { x1 = -predkosc; y1 = 0; kierunek = lewo; }
-		if (a == 2) { x1 = 0; y1 = -predkosc; kierunek = gora; }
-		if (a == 3) { x1 = 0; y1 = predkosc; kierunek = dol; }
+		if (a == 0) { x1 = predkosc; y1 = 0; kierunek = Kierunek::prawo; }
+		if (a == 1) { x1 = -predkosc; y1 = 0; kierunek = Kierunek::lewo; }
+		if (a == 2) { x1 = 0; y1 = -predkosc; kierunek = Kierunek::gora; }
+		if (a == 3) { x1 = 0; y1 = predkosc; kierunek = Kierunek::dol; }
 		if (swiat->czyRuchMozliwy(getX() + x1, getY() + y1))break;
 		i++;
 	}
@@ -30,16 +30,16 @@ void Zwierze::akcja() {
 		return;
 	}
 	postarzWiek();
-	kierunki kierunek = wybierzKierunek();
+	Kierunek kierunek = wybierzKierunek();
 	int x1=0, y1=0;
-	if (kierunek == brak) {
+	if (kierunek == Kierunek::brak) {
 		swiat->komunikat(this, "nie moze sie ruszyc ");
 		return;
 	}
-	if (kierunek == lewo) x1 = -predkosc;
-	if (kierunek == prawo)x1 = predkosc;
-	if (kierunek == gora)y1 = -predkosc;
-	if (kierunek == dol)y1 = predkosc;
+	if (kierunek == Kierunek::lewo) x1 = -predkosc;
+	if (kierunek == Kierunek::prawo)x1 = predkosc;
+	if (kierunek == Kierunek::gora)y1 = -predkosc;
+	if (kierunek == Kierunek::dol)y1 = predkosc;
 	if (swiat->getMapaOrganizmow()[getX() + x1][getY() + y1] == nullptr)swiat->przestawOrganizm(this, getX() + x1, getY() + y1);
 	else {
 		Organizm* inny = swiat->getMapaOrganizmow()[getX() + x1][getY() + y1];

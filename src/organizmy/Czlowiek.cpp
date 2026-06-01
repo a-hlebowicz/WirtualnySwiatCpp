@@ -1,7 +1,7 @@
 #include "Czlowiek.h"
 Czlowiek::Czlowiek(Swiat* swiat, int x, int y) : Zwierze(swiat,x,y,'X',5,4)
 {
-	kierunek = brak;
+	kierunek = Kierunek::brak;
 }
 
 void Czlowiek::akcja()
@@ -19,16 +19,16 @@ void Czlowiek::akcja()
 		return;
 	}
 	postarzWiek();
-	kierunki kierunek = wybierzKierunekCzlowiek(wejscie);
+	Kierunek kierunek = wybierzKierunekCzlowiek(wejscie);
 	int x1 = 0, y1 = 0;
-	if (kierunek == brak) {
+	if (kierunek == Kierunek::brak) {
 		swiat->komunikat(this, "nie moze sie ruszyc ");
 		return;
 	}
-	if (kierunek == lewo) x1 = -1;
-	if (kierunek == prawo)x1 = 1;
-	if (kierunek == gora)y1 = -1;
-	if (kierunek == dol)y1 = 1;
+	if (kierunek == Kierunek::lewo) x1 = -1;
+	if (kierunek == Kierunek::prawo)x1 = 1;
+	if (kierunek == Kierunek::gora)y1 = -1;
+	if (kierunek == Kierunek::dol)y1 = 1;
 	if (!swiat->czyRuchMozliwy(getX()+x1, getY()+y1)){swiat->komunikat(this,"Czlowiek chce wyjsc poza plansze ");return; }
 	if (swiat->getMapaOrganizmow()[getX() + x1][getY() + y1] == nullptr)swiat->przestawOrganizm(this, getX() + x1, getY() + y1);
 	else {
@@ -37,14 +37,14 @@ void Czlowiek::akcja()
 	}
 }
 
-kierunki Czlowiek::wybierzKierunekCzlowiek(char wejscie)
+Kierunek Czlowiek::wybierzKierunekCzlowiek(char wejscie)
 {
-	if (wejscie == 'a')return lewo;
-	if (wejscie == 'd')return prawo;
-	if (wejscie == 'w')return gora;
-	if (wejscie == 's')return dol;
-	if (wejscie == 'r')return r;
-	return brak;
+	if (wejscie == 'a')return Kierunek::lewo;
+	if (wejscie == 'd')return Kierunek::prawo;
+	if (wejscie == 'w')return Kierunek::gora;
+	if (wejscie == 's')return Kierunek::dol;
+	if (wejscie == 'r')return Kierunek::r;
+	return Kierunek::brak;
 }
 
 void Czlowiek::setWejscie(char c)

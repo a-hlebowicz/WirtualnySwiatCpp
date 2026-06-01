@@ -1,6 +1,6 @@
 #pragma once
 #include "Organizm.h"
-enum kierunki {
+enum class Kierunek {
 	brak,
 	lewo,
 	prawo,
@@ -18,6 +18,6 @@ public:
 	virtual void kolizja(Organizm* inny);
 	int getPredkosc() const;
 	void setPredkosc(int a);
-	kierunki wybierzKierunek();
+	Kierunek wybierzKierunek();
 };
 

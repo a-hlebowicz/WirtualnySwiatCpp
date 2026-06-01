@@ -3,12 +3,12 @@
 class Czlowiek :
     public Zwierze
 {
-    kierunki kierunek;
+    Kierunek kierunek;
     char wejscie;
     int umiejetnosc;
 public: Czlowiek(Swiat* swiat, int x, int y);
       void akcja();
-      kierunki wybierzKierunekCzlowiek(char wejscie);
+      Kierunek wybierzKierunekCzlowiek(char wejscie);
       void setWejscie(char c);
       void aktywujUmietnosc();
       int getUmiejetnosc();
