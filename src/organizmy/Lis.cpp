@@ -1,5 +1,5 @@
 #include "Lis.h"
-
+#include "../swiat/Swiat.h"
 Lis::Lis(Swiat* swiat, int x, int y) : Zwierze(swiat, x, y, TypOrganizmu::Lis, 3, 7) {}
 void Lis::akcja()
 {

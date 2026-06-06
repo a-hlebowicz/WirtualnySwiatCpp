@@ -1,4 +1,6 @@
 #include "Zwierze.h"
+#include <iostream>
+#include "../swiat/Swiat.h"
 
 Zwierze::Zwierze(Swiat* swiat, int x, int y, TypOrganizmu typOrganizmu, int sila, int inicjatywa) : Organizm(swiat, x, y, typOrganizmu, sila, inicjatywa)
 {

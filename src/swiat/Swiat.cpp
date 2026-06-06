@@ -18,6 +18,7 @@ Swiat::Swiat(int szerokosc, int wysokosc) {
 	this->szerokosc = szerokosc++; // aby indeksowac od 1 nie od 0
 	this->wysokosc = wysokosc++; 
 	tura = 0;	
+	czlowiek = nullptr;
 	mapaOrganizmow = std::vector< std::vector<Organizm*> >(szerokosc, std::vector<Organizm*>(wysokosc, nullptr));
 }
 
@@ -100,7 +101,7 @@ std::ostream& operator<<(std::ostream& out, const Swiat& swiat ) {
 			else if (swiat.getMapaOrganizmow()[j][i] != nullptr) {
 				typ = swiat.getMapaOrganizmow()[j][i]->getTyp();
 				ustawKolor(typ);
-				out << symbol;
+				out << typNaZnak(typ);
 				color(15);
 			}
 			else out << " ";
@@ -124,27 +125,27 @@ struct ktoPierwszy {
 
 void Swiat::ustawSwiat()
 {
-	dodajOrganizm('X', rand() % 20, rand() % 20);
-	dodajOrganizm('W', rand() % 20, rand() % 20);
-	dodajOrganizm('W', rand() % 20, rand() % 20);
-	dodajOrganizm('O', rand() % 20, rand() % 20);
-	dodajOrganizm('O', rand() % 20, rand() % 20);
-	dodajOrganizm('Z', rand() % 20, rand() % 20);
-	dodajOrganizm('Z', rand() % 20, rand() % 20);
-	dodajOrganizm('A', rand() % 20, rand() % 20);
-	dodajOrganizm('A', rand() % 20, rand() % 20);
-	dodajOrganizm('L', rand() % 20, rand() % 20);
-	dodajOrganizm('L', rand() % 20, rand() % 20);
-	dodajOrganizm('T', rand() % 20, rand() % 20);
-	dodajOrganizm('T', rand() % 20, rand() % 20);
-	dodajOrganizm('M', rand() % 20, rand() % 20);
-	dodajOrganizm('M', rand() % 20, rand() % 20);
-	dodajOrganizm('J', rand() % 20, rand() % 20);
-	dodajOrganizm('J', rand() % 20, rand() % 20);
-	dodajOrganizm('B', rand() % 20, rand() % 20);
-	dodajOrganizm('B', rand() % 20, rand() % 20);
-	dodajOrganizm('G', rand() % 20, rand() % 20);
-	dodajOrganizm('G', rand() % 20, rand() % 20);
+	dodajOrganizm(TypOrganizmu::Czlowiek, rand() % 20, rand() % 20);
+	dodajOrganizm(TypOrganizmu::Wilk,		rand() % 20, rand() % 20);
+	dodajOrganizm(TypOrganizmu::Wilk, rand() % 20, rand() % 20);
+	dodajOrganizm(TypOrganizmu::Owca, rand() % 20, rand() % 20);
+	dodajOrganizm(TypOrganizmu::Owca, rand() % 20, rand() % 20);
+	dodajOrganizm(TypOrganizmu::Zolw, rand() % 20, rand() % 20);
+	dodajOrganizm(TypOrganizmu::Zolw, rand() % 20, rand() % 20);
+	dodajOrganizm(TypOrganizmu::Antylopa, rand() % 20, rand() % 20);
+	dodajOrganizm(TypOrganizmu::Antylopa, rand() % 20, rand() % 20);
+	dodajOrganizm(TypOrganizmu::Lis, rand() % 20, rand() % 20);
+	dodajOrganizm(TypOrganizmu::Lis, rand() % 20, rand() % 20);
+	dodajOrganizm(TypOrganizmu::Trawa, rand() % 20, rand() % 20);
+	dodajOrganizm(TypOrganizmu::Trawa, rand() % 20, rand() % 20);
+	dodajOrganizm(TypOrganizmu::Mlecz, rand() % 20, rand() % 20);
+	dodajOrganizm(TypOrganizmu::Mlecz, rand() % 20, rand() % 20);
+	dodajOrganizm(TypOrganizmu::WilczeJagody, rand() % 20, rand() % 20);
+	dodajOrganizm(TypOrganizmu::WilczeJagody, rand() % 20, rand() % 20);
+	dodajOrganizm(TypOrganizmu::BarszczSosnowskiego, rand() % 20, rand() % 20);
+	dodajOrganizm(TypOrganizmu::BarszczSosnowskiego, rand() % 20, rand() % 20);
+	dodajOrganizm(TypOrganizmu::Guarana, rand() % 20, rand() % 20);
+	dodajOrganizm(TypOrganizmu::Guarana, rand() % 20, rand() % 20);
 }
 
 void Swiat::wykonajTure() {
@@ -242,6 +243,7 @@ void Swiat::zastapOrganizm(Organizm* atakujacy, Organizm* broniacy)
 
 bool Swiat::jestZwierzeciem(Organizm* organizm)
 {
+	if (organizm == nullptr)return false;
 	switch (organizm->getTyp()) {
 		case TypOrganizmu::Owca:
 		case TypOrganizmu::Wilk:
@@ -329,7 +331,7 @@ void Swiat::wczytajPlik(std::string& nazwaPliku, Organizm* czlowiek)
 				czlowiek->setWiek(wiek);
 			}
 			else {
-				Organizm* organizm = dodajOrganizm(symbol, x, y);
+				Organizm* organizm = dodajOrganizm(znakNaTyp(symbol), x, y);
 				organizm->setSila(sila);
 				organizm->setWiek(wiek);
 			}

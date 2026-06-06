@@ -1,5 +1,5 @@
 #include "BarszczSosnowskiego.h"
-
+#include "../swiat/Swiat.h"
 BarszczSosnowskiego::BarszczSosnowskiego(Swiat* swiat, int x, int y):Roslina(swiat,x,y, TypOrganizmu::BarszczSosnowskiego,90)
 {
 }

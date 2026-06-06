@@ -1,4 +1,5 @@
 #include "Mlecz.h"
+#include "../swiat/Swiat.h"
 Mlecz::Mlecz(Swiat* swiat, int x, int y) : Roslina(swiat, x, y, TypOrganizmu::Mlecz, 0) { }
 
 void Mlecz::akcja(){

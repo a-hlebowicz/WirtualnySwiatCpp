@@ -1,5 +1,5 @@
 #pragma once
-#include "../swiat/Swiat.h"
+
 enum class TypOrganizmu {
 	Czlowiek,
 	Antylopa,
@@ -13,6 +13,8 @@ enum class TypOrganizmu {
 	Trawa,
 	WilczeJagody
 };
+char typNaZnak(TypOrganizmu t);
+TypOrganizmu znakNaTyp(char znak);
 struct koordynaty {
 	int x;
 	int y;
@@ -35,9 +37,8 @@ public:
 
 
 	//gettery
-	char getSymbol() const;
+	char getSymbol() const { return typNaZnak(typOrganizmu); }
 	TypOrganizmu getTyp() const;
-	char typNaZnak(TypOrganizmu t);
 	int getSila() const;
 	int getInicjatywa() const;
 	int getX() const;
@@ -49,6 +50,5 @@ public:
 	void setX(int x);
 	void setY(int y);
 	virtual ~Organizm() = default;
-	
 };
 

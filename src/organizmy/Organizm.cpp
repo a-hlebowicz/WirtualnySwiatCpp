@@ -1,4 +1,5 @@
 #include "Organizm.h"
+#include "../swiat/Swiat.h"
 Organizm::Organizm(Swiat* swiat, int x, int y, TypOrganizmu typOrganizmu, int sila, int inicjatywa) {
 	polozenie.x = x;
 	polozenie.y = y;
@@ -28,6 +29,23 @@ char typNaZnak(TypOrganizmu t) {
 	}
 	return '?';
 }
+TypOrganizmu znakNaTyp(char znak) {
+	switch (znak) {
+	case 'T': return TypOrganizmu::Trawa;
+	case 'M': return TypOrganizmu::Mlecz;
+	case 'G': return TypOrganizmu::Guarana;
+	case 'J': return TypOrganizmu::WilczeJagody;
+	case 'B': return TypOrganizmu::BarszczSosnowskiego;
+	case 'W': return TypOrganizmu::Wilk;
+	case 'O': return TypOrganizmu::Owca;
+	case 'L': return TypOrganizmu::Lis;
+	case 'Z': return TypOrganizmu::Zolw;
+	case 'A': return TypOrganizmu::Antylopa;
+	case 'X': return TypOrganizmu::Czlowiek;
+	default:  throw std::invalid_argument("Niepoprawny znak organizmu!");
+	}
+}
+
 int Organizm::getSila() const { return sila; }
 int Organizm::getInicjatywa() const { return inicjatywa; }
 int Organizm::getX() const { return polozenie.x; }

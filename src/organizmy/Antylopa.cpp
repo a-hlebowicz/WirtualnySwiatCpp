@@ -1,4 +1,5 @@
 #include "Antylopa.h"
+#include "../swiat/Swiat.h"
 
 Antylopa::Antylopa(Swiat* swiat, int x, int y) :Zwierze(swiat, x, y, TypOrganizmu::Antylopa, 4, 4) {
 	setPredkosc(2);
