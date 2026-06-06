@@ -11,7 +11,7 @@ void Roslina::akcja() {
 		return;
 	}
 	postarzWiek();
-	if (swiat->losujProcent(5)) {
+	if (rng.losujProcent(5)) {
 		if (swiat->czySasiadujaceWolne(getX(), getY()) == true) {
 			koordynaty2 pole = swiat->znajdzWolnePole(this);
 			int x1 = pole.x, y1 = pole.y;

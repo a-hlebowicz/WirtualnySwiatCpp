@@ -23,7 +23,7 @@ Swiat::Swiat(int szerokosc, int wysokosc) {
 }
 
 Organizm* Swiat::dodajCzlowieka(int x, int y) {
-	std::unique_ptr<Czlowiek> czlowiek  = std::make_unique <Czlowiek>(this, x, y);
+	std::unique_ptr<Czlowiek> czlowiek  = std::make_unique <Czlowiek>(this, this->rng, x, y);
 	Organizm* obs = czlowiek.get();
 	this->czlowiek = czlowiek.get();
 	mapaOrganizmow[obs->getX()][obs->getY()] = obs;
@@ -45,16 +45,16 @@ Organizm* Swiat::dodajOrganizm(TypOrganizmu typ,int x, int y) {
 		Organizm* obs = dodajCzlowieka(x, y);
 		return obs;
 	} 
-	if (typ == TypOrganizmu::Trawa )organizm = std::make_unique <Trawa>(this, x, y);
-	if (typ == TypOrganizmu::Mlecz )organizm = std::make_unique <Mlecz>(this, x, y);
-	if (typ == TypOrganizmu::Wilk )organizm = std::make_unique <Wilk>(this, x, y);
-	if (typ == TypOrganizmu::Owca )organizm = std::make_unique <Owca>(this, x, y);
-	if (typ == TypOrganizmu::Lis )organizm = std::make_unique <Lis>(this, x, y);
-	if (typ == TypOrganizmu::Zolw )organizm = std::make_unique <Zolw>(this, x, y);
-	if (typ == TypOrganizmu::Antylopa )organizm = std::make_unique <Antylopa>(this, x, y);
-	if (typ == TypOrganizmu::Guarana )organizm = std::make_unique <Guarana>(this, x, y);
-	if (typ == TypOrganizmu::WilczeJagody )organizm = std::make_unique <WilczeJagody>(this, x, y);
-	if (typ == TypOrganizmu::BarszczSosnowskiego )organizm = std::make_unique <BarszczSosnowskiego>(this, x, y);
+	if (typ == TypOrganizmu::Trawa )organizm = std::make_unique <Trawa>(this,this->rng, x, y);
+	if (typ == TypOrganizmu::Mlecz )organizm = std::make_unique <Mlecz>(this, this->rng, x, y);
+	if (typ == TypOrganizmu::Wilk )organizm = std::make_unique <Wilk>(this, this->rng, x, y);
+	if (typ == TypOrganizmu::Owca )organizm = std::make_unique <Owca>(this, this->rng, x, y);
+	if (typ == TypOrganizmu::Lis )organizm = std::make_unique <Lis>(this, this->rng, x, y);
+	if (typ == TypOrganizmu::Zolw )organizm = std::make_unique <Zolw>(this, this->rng, x, y);
+	if (typ == TypOrganizmu::Antylopa )organizm = std::make_unique <Antylopa>(this, this->rng, x, y);
+	if (typ == TypOrganizmu::Guarana )organizm = std::make_unique <Guarana>(this, this->rng, x, y);
+	if (typ == TypOrganizmu::WilczeJagody )organizm = std::make_unique <WilczeJagody>(this, this->rng, x, y);
+	if (typ == TypOrganizmu::BarszczSosnowskiego )organizm = std::make_unique <BarszczSosnowskiego>(this, this->rng, x, y);
 
 	if (organizm == nullptr) {
 		std::cout << "nie mozna stworzyc organizmu \n";

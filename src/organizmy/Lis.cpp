@@ -28,16 +28,12 @@ Kierunek Lis::wybierzKierunekLis()
 {
 	Kierunek kierunek = Kierunek::brak;
 	//if (!swiat->czySasiadujaceWolne(getX(), getY()))return kierunek;
-	int x1 = 0, y1 = 0, i=0;
+	int i=0;
 	while (1) {
 		if (i >= 50)return Kierunek::brak;
-		int a = swiat->losujInt(0,3);
-		if (a == 0) { x1 = 1; y1 = 0; kierunek = Kierunek::prawo; }
-		if (a == 1) { x1 = -1; y1 = 0; kierunek = Kierunek::lewo; }
-		if (a == 2) { x1 = 0; y1 = -1; kierunek = Kierunek::gora; }
-		if (a == 3) { x1 = 0; y1 = 1; kierunek = Kierunek::dol; }
-		if (swiat->czyRuchMozliwy(getX() + x1, getY() + y1)) 
-		if(swiat->getMapaOrganizmow()[getX() + x1][getY() + y1]==nullptr || swiat->getMapaOrganizmow()[getX()+x1][getY()+y1]->getSila()<=getSila())break;
+		auto [dx, dy] = kierunekNaWektor(rng.losowyKierunek());
+		if (swiat->czyRuchMozliwy(getX() + dx, getY() + dy)) 
+		if(swiat->getMapaOrganizmow()[getX() + dx][getY() + dy]==nullptr || swiat->getMapaOrganizmow()[getX()+dx][getY()+dy]->getSila()<=getSila())break;
 		i++;
 	}
 	return kierunek;

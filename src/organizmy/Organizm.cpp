@@ -2,20 +2,15 @@
 #include "../swiat/Swiat.h"
 #include <stdexcept>
 
-Wektor kierunekNaWektor(Kierunek k, int predkosc = 1) {
+Wektor kierunekNaWektor(Kierunek k, int predkosc) {
 	switch (k) {
 	case Kierunek::lewo:  return { -predkosc, 0 };
 	case Kierunek::prawo: return { predkosc, 0 };
 	case Kierunek::gora:  return { 0, -predkosc };
 	case Kierunek::dol:   return { 0,  predkosc };
-	default:              return { 0, 0 };
 	}
+	return { 0, 0 };
 }
-
-Kierunek losowyKierunek() {
-	
-}
-
 
 Organizm::Organizm(Swiat* swiat, Rng &rng, int x, int y, TypOrganizmu typOrganizmu, int sila, int inicjatywa) : 
 	swiat(swiat),
