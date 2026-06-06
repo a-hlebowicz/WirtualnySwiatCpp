@@ -1,6 +1,6 @@
 #include "Zwierze.h"
 
-Zwierze::Zwierze(Swiat* swiat, int x, int y, char symbol, int sila, int inicjatywa) : Organizm(swiat, x, y, symbol, sila, inicjatywa)
+Zwierze::Zwierze(Swiat* swiat, int x, int y, TypOrganizmu typOrganizmu, int sila, int inicjatywa) : Organizm(swiat, x, y, typOrganizmu, sila, inicjatywa)
 {
 	predkosc = 1;
 }
@@ -47,12 +47,12 @@ void Zwierze::akcja() {
 	}
 }
 void Zwierze::kolizja(Organizm* atakujacy) {
-	if (this->getSymbol() == atakujacy->getSymbol()) {
+	if (this->getTyp() == atakujacy->getTyp()) {
 		//dziecko
 		if (swiat->czySasiadujaceWolne(this->getX(), this->getY())) {
 			koordynaty2 pole = swiat->znajdzWolnePole(this);	
 			int x1 = pole.x, y1 = pole.y;	
-			swiat->dodajOrganizm(getSymbol(), x1,  y1);	
+			swiat->dodajOrganizm(getTyp(), x1,  y1);
 			swiat->komunikat(this, "sie rozmnozyl");	
 		}
 		//else swiat->komunikat(this, "nie ma miejsca na rozmnazanie");	

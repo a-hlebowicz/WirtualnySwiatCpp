@@ -1,12 +1,12 @@
 #include "Antylopa.h"
 
-Antylopa::Antylopa(Swiat* swiat, int x, int y) :Zwierze(swiat, x, y, 'A', 4, 4) {
+Antylopa::Antylopa(Swiat* swiat, int x, int y) :Zwierze(swiat, x, y, TypOrganizmu::Antylopa, 4, 4) {
 	setPredkosc(2);
 }
 
 void Antylopa::kolizja(Organizm* atakujacy)
 {
-	if (rand() % 2 == 0 || atakujacy->getSymbol() == getSymbol())Zwierze::kolizja(atakujacy);
+	if (rand() % 2 == 0 || atakujacy->getTyp() == getTyp())Zwierze::kolizja(atakujacy);
 	else {
 		if (!swiat->czySasiadujaceWolne(getX(), getY()))Zwierze::kolizja(atakujacy);
 		else {

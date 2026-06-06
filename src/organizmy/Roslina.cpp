@@ -1,7 +1,7 @@
 #include "Roslina.h"
 #include "../swiat/Swiat.h"
 #define SZANSA_NA_ROZPRZESTRZENIENIE 20;
-Roslina::Roslina(Swiat* swiat, int x, int y, char symbol, int sila) : Organizm (swiat,x,y,symbol,sila,0) {
+Roslina::Roslina(Swiat* swiat, int x, int y, TypOrganizmu typOrganizmu, int sila) : Organizm(swiat, x, y, typOrganizmu, sila, 0) {
 }
 
 void Roslina::akcja() {
@@ -15,7 +15,7 @@ void Roslina::akcja() {
 		if (swiat->czySasiadujaceWolne(getX(), getY()) == true) {
 			koordynaty2 pole = swiat->znajdzWolnePole(this);
 			int x1 = pole.x, y1 = pole.y;
-			swiat->dodajOrganizm(this->getSymbol(), x1, y1);
+			swiat->dodajOrganizm(this->getTyp(), x1, y1);
 			swiat->komunikat(this, "sie rozprzestrzenil");
 		}
 	}

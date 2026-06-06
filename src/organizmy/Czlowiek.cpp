@@ -1,5 +1,5 @@
 #include "Czlowiek.h"
-Czlowiek::Czlowiek(Swiat* swiat, int x, int y) : Zwierze(swiat,x,y,'X',5,4)
+Czlowiek::Czlowiek(Swiat* swiat, int x, int y) : Zwierze(swiat,x,y, TypOrganizmu::Czlowiek,5,4)
 {
 	kierunek = Kierunek::brak;
 }
@@ -43,7 +43,7 @@ Kierunek Czlowiek::wybierzKierunekCzlowiek(char wejscie)
 	if (wejscie == 'd')return Kierunek::prawo;
 	if (wejscie == 'w')return Kierunek::gora;
 	if (wejscie == 's')return Kierunek::dol;
-	if (wejscie == 'r')return Kierunek::r;
+	if (wejscie == 'r')return Kierunek::umiejetnosc;
 	return Kierunek::brak;
 }
 

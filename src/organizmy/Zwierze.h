@@ -6,14 +6,14 @@ enum class Kierunek {
 	prawo,
 	gora,
 	dol,
-	r
+	umiejetnosc
 };
 class Zwierze :
     public Organizm
 {
 	int predkosc;
 public:
-	Zwierze(Swiat* swiat, int x, int y,char symbol ,int sila, int inicjatywa);
+	Zwierze(Swiat* swiat, int x, int y, TypOrganizmu typOrganizmu,int sila, int inicjatywa);
 	virtual void akcja();
 	virtual void kolizja(Organizm* inny);
 	int getPredkosc() const;

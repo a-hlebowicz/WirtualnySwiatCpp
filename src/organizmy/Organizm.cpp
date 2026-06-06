@@ -1,15 +1,32 @@
 #include "Organizm.h"
-Organizm::Organizm(Swiat* swiat, int x, int y, char symbol, int sila, int inicjatywa) {
+Organizm::Organizm(Swiat* swiat, int x, int y, TypOrganizmu typOrganizmu, int sila, int inicjatywa) {
 	polozenie.x = x;
 	polozenie.y = y;
-	this->symbol = symbol;
+	this->typOrganizmu = typOrganizmu;
 	this->sila = sila;
 	this->inicjatywa = inicjatywa;
 	this->swiat = swiat;
 	wiek = 0;
 }
-char Organizm::getSymbol() const {
-	return symbol;
+
+TypOrganizmu Organizm::getTyp() const {
+	return typOrganizmu;
+}
+char typNaZnak(TypOrganizmu t) {
+	switch (t) {
+	case TypOrganizmu::Trawa:               return 'T';
+	case TypOrganizmu::Mlecz:               return 'M';
+	case TypOrganizmu::Guarana:             return 'G';
+	case TypOrganizmu::WilczeJagody:        return 'J';
+	case TypOrganizmu::BarszczSosnowskiego: return 'B';
+	case TypOrganizmu::Wilk:                return 'W';
+	case TypOrganizmu::Owca:                return 'O';
+	case TypOrganizmu::Lis:                 return 'L';
+	case TypOrganizmu::Zolw:                return 'Z';
+	case TypOrganizmu::Antylopa:            return 'A';
+	case TypOrganizmu::Czlowiek:            return 'X';
+	}
+	return '?';
 }
 int Organizm::getSila() const { return sila; }
 int Organizm::getInicjatywa() const { return inicjatywa; }

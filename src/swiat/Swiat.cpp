@@ -30,10 +30,9 @@ Organizm* Swiat::dodajCzlowieka(int x, int y) {
 	return obs;
 }
 
-Organizm* Swiat::dodajOrganizm(char symbol,int x, int y) {
+Organizm* Swiat::dodajOrganizm(TypOrganizmu typ,int x, int y) {
 	/*
 	TODO
-	zapakowac to jakos w enuma
 	zmienic wypisaywanie cout na komunikat
 	*/
 	if (mapaOrganizmow[x][y] != nullptr) {
@@ -41,20 +40,20 @@ Organizm* Swiat::dodajOrganizm(char symbol,int x, int y) {
 		return nullptr;
 	}
 	std::unique_ptr<Organizm> organizm;
-	if (symbol == 'X') {
+	if (typ == TypOrganizmu::Czlowiek) {
 		Organizm* obs = dodajCzlowieka(x, y);
 		return obs;
 	} 
-	if (symbol == 'T')organizm = std::make_unique <Trawa>(this, x, y);
-	if (symbol == 'M')organizm = std::make_unique <Mlecz>(this, x, y);
-	if (symbol == 'W')organizm = std::make_unique <Wilk>(this, x, y);
-	if (symbol == 'O')organizm = std::make_unique <Owca>(this, x, y);
-	if (symbol == 'L')organizm = std::make_unique <Lis>(this, x, y);
-	if (symbol == 'Z')organizm = std::make_unique <Zolw>(this, x, y);
-	if (symbol == 'A')organizm = std::make_unique <Antylopa>(this, x, y);
-	if (symbol == 'G')organizm = std::make_unique <Guarana>(this, x, y);
-	if (symbol == 'J')organizm = std::make_unique <WilczeJagody>(this, x, y);
-	if (symbol == 'B')organizm = std::make_unique <BarszczSosnowskiego>(this, x, y);
+	if (typ == TypOrganizmu::Trawa )organizm = std::make_unique <Trawa>(this, x, y);
+	if (typ == TypOrganizmu::Mlecz )organizm = std::make_unique <Mlecz>(this, x, y);
+	if (typ == TypOrganizmu::Wilk )organizm = std::make_unique <Wilk>(this, x, y);
+	if (typ == TypOrganizmu::Owca )organizm = std::make_unique <Owca>(this, x, y);
+	if (typ == TypOrganizmu::Lis )organizm = std::make_unique <Lis>(this, x, y);
+	if (typ == TypOrganizmu::Zolw )organizm = std::make_unique <Zolw>(this, x, y);
+	if (typ == TypOrganizmu::Antylopa )organizm = std::make_unique <Antylopa>(this, x, y);
+	if (typ == TypOrganizmu::Guarana )organizm = std::make_unique <Guarana>(this, x, y);
+	if (typ == TypOrganizmu::WilczeJagody )organizm = std::make_unique <WilczeJagody>(this, x, y);
+	if (typ == TypOrganizmu::BarszczSosnowskiego )organizm = std::make_unique <BarszczSosnowskiego>(this, x, y);
 
 	if (organizm == nullptr) {
 		std::cout << "nie mozna stworzyc organizmu \n";
@@ -76,56 +75,31 @@ void Swiat::dodajCzlowieka(Organizm* organizm)
 void color(int color) {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
-void ustawKolor(char symbol) {
-	switch (symbol)
-	{
-	case 'T':
-		color(10);
-		break;
-	case 'M':
-		color(14);
-		break;
-	case 'G':
-		color(13);
-		break;
-	case 'J':
-		color(12);
-		break;
-	case 'B':
-		color(4);
-		break;
-	case 'X':
-		color(11);
-		break;
-	case 'W':
-		color(8);
-		break;
-	case 'O':
-		color(15);
-		break;
-	case 'Z':
-		color(2);
-		break;
-	case 'L':
-		color(6);
-		break;
-	case 'A':
-		color(6);
-		break;
-	default:
-		color(15);
-		break;
+void ustawKolor(TypOrganizmu typ) {
+	switch (typ) {
+		case TypOrganizmu::Trawa:               color(10); break;
+		case TypOrganizmu::Mlecz:               color(14); break;
+		case TypOrganizmu::Guarana:             color(13); break;
+		case TypOrganizmu::WilczeJagody:        color(12); break;
+		case TypOrganizmu::BarszczSosnowskiego: color(4);  break;
+		case TypOrganizmu::Wilk:                color(8);  break;
+		case TypOrganizmu::Owca:                color(15); break;
+		case TypOrganizmu::Zolw:                color(2);  break;
+		case TypOrganizmu::Lis:                 color(6);  break;
+		case TypOrganizmu::Antylopa:            color(6);  break;
+		case TypOrganizmu::Czlowiek:            color(11); break;
+		default:                                color(15); break;
 	}
-}
+	}
 std::ostream& operator<<(std::ostream& out, const Swiat& swiat ) {
-	char symbol;
+	TypOrganizmu typ;
 	out <<"tura: " << swiat.getTura() << std::endl;
 	for (int i = 0; swiat.getWysokosc()+1 >= i; i++) {
 		for (int j = 0; swiat.getSzerokosc()+1 >= j; j++) {
 			if (i == 0 || j == 0 || i == swiat.getWysokosc() + 1 || j == swiat.getWysokosc() + 1)out << '*';
 			else if (swiat.getMapaOrganizmow()[j][i] != nullptr) {
-				symbol = swiat.getMapaOrganizmow()[j][i]->getSymbol();
-				ustawKolor(symbol);
+				typ = swiat.getMapaOrganizmow()[j][i]->getTyp();
+				ustawKolor(typ);
 				out << symbol;
 				color(15);
 			}
@@ -234,7 +208,7 @@ void Swiat::usunOrganizmyZListy() {
 	while (!doUsuniecia.empty()) {
 		Organizm* organizm = doUsuniecia.front();
 		doUsuniecia.pop();
-		if (organizm->getSymbol() == 'X') czlowiek = nullptr;
+		if (organizm->getTyp() == TypOrganizmu::Czlowiek) czlowiek = nullptr;
 		listaOrganizmow.remove_if([&](const std::unique_ptr<Organizm>& p) {
 			return p.get() == organizm;
 		});
@@ -268,14 +242,17 @@ void Swiat::zastapOrganizm(Organizm* atakujacy, Organizm* broniacy)
 
 bool Swiat::jestZwierzeciem(Organizm* organizm)
 {
-	if (organizm == nullptr)return false;
-	if (organizm->getSymbol() == 'O')return true;
-	if (organizm->getSymbol() == 'W')return true;
-	if (organizm->getSymbol() == 'L')return true;
-	if (organizm->getSymbol() == 'A')return true;
-	if (organizm->getSymbol() == 'Z')return true;
-	if (organizm->getSymbol() == 'X')return true;
-	return false;
+	switch (organizm->getTyp()) {
+		case TypOrganizmu::Owca:
+		case TypOrganizmu::Wilk:
+		case TypOrganizmu::Lis:
+		case TypOrganizmu::Antylopa:
+		case TypOrganizmu::Zolw:
+		case TypOrganizmu::Czlowiek:
+			return true;
+		default:
+			return false;
+	}
 }
 
 koordynaty2 Swiat::znajdzWolnePole(Organizm* organizm)

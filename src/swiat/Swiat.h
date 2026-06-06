@@ -36,7 +36,7 @@ public:
 	//std::list<std::unique_ptr<Organizm>>& getListaOrganizmow() const { return listaOrganizmow; }; nikt tego i tak nie uzywa?
 	void ustawSwiat();
 	void wykonajTure();
-	Organizm* dodajOrganizm(char symbol, int x, int y);
+	Organizm* dodajOrganizm(TypOrganizmu typ, int x, int y);
 	Organizm* dodajCzlowieka(int x, int y);
 	void przestawOrganizm(Organizm* organizm,int x1, int x2);
 	void przegonOrganizm(Organizm* atakujacy, Organizm* broniacy);
