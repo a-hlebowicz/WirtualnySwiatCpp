@@ -1,5 +1,6 @@
 #include "Organizm.h"
 #include "../swiat/Swiat.h"
+#include <stdexcept>
 Organizm::Organizm(Swiat* swiat, int x, int y, TypOrganizmu typOrganizmu, int sila, int inicjatywa) {
 	polozenie.x = x;
 	polozenie.y = y;

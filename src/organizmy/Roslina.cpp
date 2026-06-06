@@ -1,17 +1,17 @@
 #include "Roslina.h"
 #include "../swiat/Swiat.h"
-#define SZANSA_NA_ROZPRZESTRZENIENIE 20;
+//#define SZANSA_NA_ROZPRZESTRZENIENIE 20;
 Roslina::Roslina(Swiat* swiat, int x, int y, TypOrganizmu typOrganizmu, int sila) : Organizm(swiat, x, y, typOrganizmu, sila, 0) {
 }
 
 void Roslina::akcja() {
-	bool czyRozprzestrzeni = rand() % SZANSA_NA_ROZPRZESTRZENIENIE;
+	//bool czyRozprzestrzeni = rand() % SZANSA_NA_ROZPRZESTRZENIENIE;
 	if (getWiek() <= 0) {
 		postarzWiek();
 		return;
 	}
 	postarzWiek();
-	if (czyRozprzestrzeni == 0) {
+	if (swiat->losujProcent(5)) {
 		if (swiat->czySasiadujaceWolne(getX(), getY()) == true) {
 			koordynaty2 pole = swiat->znajdzWolnePole(this);
 			int x1 = pole.x, y1 = pole.y;

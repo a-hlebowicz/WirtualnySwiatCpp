@@ -6,7 +6,6 @@
 using namespace std;
 
 int main() {
-	srand(time(NULL));
 	unsigned char a = -1;
 	Swiat swiat(20,20);
 	//Czlowiek czlowiek(&swiat, rand() % 20, rand() % 20);

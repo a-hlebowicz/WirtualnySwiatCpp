@@ -31,7 +31,7 @@ Kierunek Lis::wybierzKierunekLis()
 	int x1 = 0, y1 = 0, i=0;
 	while (1) {
 		if (i >= 50)return Kierunek::brak;
-		int a = rand() % 4;
+		int a = swiat->losujInt(0,3);
 		if (a == 0) { x1 = 1; y1 = 0; kierunek = Kierunek::prawo; }
 		if (a == 1) { x1 = -1; y1 = 0; kierunek = Kierunek::lewo; }
 		if (a == 2) { x1 = 0; y1 = -1; kierunek = Kierunek::gora; }

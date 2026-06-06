@@ -4,7 +4,7 @@ Zolw::Zolw(Swiat* swiat, int x, int y) : Zwierze(swiat, x, y, TypOrganizmu::Zolw
 void Zolw::akcja()
 {
 	postarzWiek();
-	if (rand() % 4 == 1) {
+	if (swiat->losujProcent(25)) {   //sprawdzic ile procent w oryginale
 		Zwierze::akcja();
 		setWiek(getWiek() - 1);
 	}

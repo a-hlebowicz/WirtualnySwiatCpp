@@ -7,7 +7,7 @@ Antylopa::Antylopa(Swiat* swiat, int x, int y) :Zwierze(swiat, x, y, TypOrganizm
 
 void Antylopa::kolizja(Organizm* atakujacy)
 {
-	if (rand() % 2 == 0 || atakujacy->getTyp() == getTyp())Zwierze::kolizja(atakujacy);
+	if (swiat->losujProcent(50) || atakujacy->getTyp() == getTyp())Zwierze::kolizja(atakujacy);
 	else {
 		if (!swiat->czySasiadujaceWolne(getX(), getY()))Zwierze::kolizja(atakujacy);
 		else {

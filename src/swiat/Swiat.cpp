@@ -20,10 +20,12 @@ Swiat::Swiat(int szerokosc, int wysokosc) {
 	tura = 0;	
 	czlowiek = nullptr;
 	mapaOrganizmow = std::vector< std::vector<Organizm*> >(szerokosc, std::vector<Organizm*>(wysokosc, nullptr));
+	std::random_device rd;
+	rng.seed(rd());
 }
 
 Organizm* Swiat::dodajCzlowieka(int x, int y) {
-	std::unique_ptr<Czlowiek> czlowiek = std::make_unique <Czlowiek>(this, x, y);
+	std::unique_ptr<Czlowiek> czlowiek  = std::make_unique <Czlowiek>(this, x, y);
 	Organizm* obs = czlowiek.get();
 	this->czlowiek = czlowiek.get();
 	mapaOrganizmow[obs->getX()][obs->getY()] = obs;
@@ -123,29 +125,45 @@ struct ktoPierwszy {
 	}
 };
 
+bool Swiat::jestZwierzeciem(Organizm* organizm)
+{
+	if (organizm == nullptr)return false;
+	switch (organizm->getTyp()) {
+	case TypOrganizmu::Owca:
+	case TypOrganizmu::Wilk:
+	case TypOrganizmu::Lis:
+	case TypOrganizmu::Antylopa:
+	case TypOrganizmu::Zolw:
+	case TypOrganizmu::Czlowiek:
+		return true;
+	default:
+		return false;
+	}
+}
+
 void Swiat::ustawSwiat()
 {
-	dodajOrganizm(TypOrganizmu::Czlowiek, rand() % 20, rand() % 20);
-	dodajOrganizm(TypOrganizmu::Wilk,		rand() % 20, rand() % 20);
-	dodajOrganizm(TypOrganizmu::Wilk, rand() % 20, rand() % 20);
-	dodajOrganizm(TypOrganizmu::Owca, rand() % 20, rand() % 20);
-	dodajOrganizm(TypOrganizmu::Owca, rand() % 20, rand() % 20);
-	dodajOrganizm(TypOrganizmu::Zolw, rand() % 20, rand() % 20);
-	dodajOrganizm(TypOrganizmu::Zolw, rand() % 20, rand() % 20);
-	dodajOrganizm(TypOrganizmu::Antylopa, rand() % 20, rand() % 20);
-	dodajOrganizm(TypOrganizmu::Antylopa, rand() % 20, rand() % 20);
-	dodajOrganizm(TypOrganizmu::Lis, rand() % 20, rand() % 20);
-	dodajOrganizm(TypOrganizmu::Lis, rand() % 20, rand() % 20);
-	dodajOrganizm(TypOrganizmu::Trawa, rand() % 20, rand() % 20);
-	dodajOrganizm(TypOrganizmu::Trawa, rand() % 20, rand() % 20);
-	dodajOrganizm(TypOrganizmu::Mlecz, rand() % 20, rand() % 20);
-	dodajOrganizm(TypOrganizmu::Mlecz, rand() % 20, rand() % 20);
-	dodajOrganizm(TypOrganizmu::WilczeJagody, rand() % 20, rand() % 20);
-	dodajOrganizm(TypOrganizmu::WilczeJagody, rand() % 20, rand() % 20);
-	dodajOrganizm(TypOrganizmu::BarszczSosnowskiego, rand() % 20, rand() % 20);
-	dodajOrganizm(TypOrganizmu::BarszczSosnowskiego, rand() % 20, rand() % 20);
-	dodajOrganizm(TypOrganizmu::Guarana, rand() % 20, rand() % 20);
-	dodajOrganizm(TypOrganizmu::Guarana, rand() % 20, rand() % 20);
+	dodajOrganizm(TypOrganizmu::Czlowiek, losujInt(1,20), losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Wilk, losujInt(1, 20), losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Wilk, losujInt(1, 20), losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Owca, losujInt(1, 20), losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Owca, losujInt(1, 20), losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Zolw, losujInt(1, 20), losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Zolw, losujInt(1, 20), losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Antylopa, losujInt(1, 20), losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Antylopa, losujInt(1, 20), losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Lis, losujInt(1, 20), losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Lis, losujInt(1, 20), losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Trawa, losujInt(1, 20), losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Trawa, losujInt(1, 20), losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Mlecz, losujInt(1, 20), losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Mlecz, losujInt(1, 20), losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::WilczeJagody, losujInt(1, 20), losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::WilczeJagody, losujInt(1, 20), losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::BarszczSosnowskiego, losujInt(1, 20), losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::BarszczSosnowskiego, losujInt(1, 20), losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Guarana, losujInt(1, 20), losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Guarana, losujInt(1, 20), losujInt(1, 20));
 }
 
 void Swiat::wykonajTure() {
@@ -218,7 +236,71 @@ void Swiat::usunOrganizmyZListy() {
 	}
 }
 
-void Swiat::komunikat(Organizm* organizm, std::string text){
+
+void Swiat::zastapOrganizm(Organizm* atakujacy, Organizm* broniacy)
+{
+	int nowy_x = broniacy->getX(), nowy_y = broniacy->getY();
+	usunOrganizm(broniacy);
+	przestawOrganizm(atakujacy, nowy_x, nowy_y);
+}
+
+koordynaty2 Swiat::znajdzWolnePole(Organizm* organizm)
+{
+	int x1 = 0, y1 = 0, i=0;
+	koordynaty2 pole;
+	while (1) {
+		if (i > 50) {
+			komunikat(organizm, "nie znaleziono wolnego pola ");
+			pole.x = organizm->getX()+0; pole.y = organizm->getY() + 0;
+			return pole;
+		}
+		int a = losujInt(0,3);
+		if (a == 0) { x1 = 1; y1 = 0; }
+		if (a == 1) { x1 = -1; y1 = 0; }
+		if (a == 2) { x1 = 0; y1 = 1; }
+		if (a == 3) { x1 = 0; y1 = -1; }
+		if (czyPoleWolne(organizm->getX() + x1, organizm->getY() + y1)) {
+			pole.x = organizm->getX() + x1;
+			pole.y = organizm->getY() + y1;
+			return pole;
+		}
+	}
+}
+
+
+
+bool Swiat::czyCzlowiekZyje() {
+	if (czlowiek != nullptr)return true;
+	return false;
+}
+void Swiat::czlowiekUmiejetnosc() {
+	if (!czyCzlowiekZyje()) return;
+	if (czlowiek->getUmiejetnosc() > 0) return;
+	czlowiek->aktywujUmietnosc();
+	return;
+}
+
+void Swiat::czlowiekSetWejscie(char c) {
+	if (!czyCzlowiekZyje()) return;
+	czlowiek->setWejscie(c);
+}
+
+//=============================
+
+int Swiat::losujInt(int min, int max) {
+	std::uniform_int_distribution<int> rozklad(min, max);
+	return rozklad(rng);
+}
+bool Swiat::losujProcent(double p) {
+	std::bernoulli_distribution rozklad(p/100);
+	return rozklad(rng);
+}
+
+
+//=============================
+
+
+void Swiat::komunikat(Organizm* organizm, std::string text) {
 	std::string napis;
 	napis = organizm->getSymbol();
 	text = ":" + text;
@@ -234,66 +316,7 @@ void Swiat::wyswietlKomunikaty()
 	}
 }
 
-void Swiat::zastapOrganizm(Organizm* atakujacy, Organizm* broniacy)
-{
-	int nowy_x = broniacy->getX(), nowy_y = broniacy->getY();
-	usunOrganizm(broniacy);
-	przestawOrganizm(atakujacy, nowy_x, nowy_y);
-}
-
-bool Swiat::jestZwierzeciem(Organizm* organizm)
-{
-	if (organizm == nullptr)return false;
-	switch (organizm->getTyp()) {
-		case TypOrganizmu::Owca:
-		case TypOrganizmu::Wilk:
-		case TypOrganizmu::Lis:
-		case TypOrganizmu::Antylopa:
-		case TypOrganizmu::Zolw:
-		case TypOrganizmu::Czlowiek:
-			return true;
-		default:
-			return false;
-	}
-}
-
-koordynaty2 Swiat::znajdzWolnePole(Organizm* organizm)
-{
-	int x1 = 0, y1 = 0, i=0;
-	koordynaty2 pole;
-	while (1) {
-		if (i > 50) {
-			komunikat(organizm, "nie znaleziono wolnego pola ");
-			pole.x = organizm->getX()+0; pole.y = organizm->getY() + 0;
-			return pole;
-		}
-		int a = rand() % 4;
-		if (a == 0) { x1 = 1; y1 = 0; }
-		if (a == 1) { x1 = -1; y1 = 0; }
-		if (a == 2) { x1 = 0; y1 = 1; }
-		if (a == 3) { x1 = 0; y1 = -1; }
-		if (czyPoleWolne(organizm->getX() + x1, organizm->getY() + y1)) {
-			pole.x = organizm->getX() + x1;
-			pole.y = organizm->getY() + y1;
-			return pole;
-		}
-	}
-}
-
-bool Swiat::czyCzlowiekZyje() {
-	if (czlowiek != nullptr)return true;
-	return false;
-}
-void Swiat::czlowiekUmiejetnosc() {
-	if (!czyCzlowiekZyje()) return;
-	if (czlowiek->getUmiejetnosc() > 0) return;
-	czlowiek->aktywujUmietnosc();
-	return;
-}
-
-void Swiat::czlowiekSetWejscie(char c) {
-	czlowiek->setWejscie(c);
-}
+//================================
 void Swiat::zapiszDoPliku() {
 	std::string napis;
 	std::cout << "podaj nazwe pliku ";

@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <queue>
 #include <conio.h>
+#include <random>
 struct koordynaty2 { //nie dzialalo dla zwyklych koordynatow
 	int x;
 	int y;
@@ -15,6 +16,7 @@ class Czlowiek;
 class Swiat
 {
 private:
+	std::mt19937 random;
 	int tura;
 	int szerokosc;
 	int wysokosc;
@@ -58,5 +60,7 @@ public:
 	bool czyCzlowiekZyje();
 	void czlowiekUmiejetnosc();
 	void czlowiekSetWejscie(char c);
+	int losujInt(int min, int max);
+	bool losujProcent(double p);
 
 };

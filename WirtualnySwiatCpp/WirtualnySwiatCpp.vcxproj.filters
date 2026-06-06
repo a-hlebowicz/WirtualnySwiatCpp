@@ -62,9 +62,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\swiat\Swiat.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\organizmy\Zwierze.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
@@ -108,6 +105,9 @@
       <Filter>Pliki zasobów</Filter>
     </ClCompile>
     <ClCompile Include="..\src\main.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\swiat\Swiat.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
