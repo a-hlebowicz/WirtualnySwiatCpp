@@ -4,6 +4,6 @@ class Wilk :
     public Zwierze
 {
 public:
-    Wilk(Swiat* swiat,int x, int y);
+    Wilk(Swiat* swiat, Rng& rng, int x, int y);
 };
 

@@ -1,6 +1,6 @@
 #include "Czlowiek.h"
 #include "../swiat/Swiat.h"
-Czlowiek::Czlowiek(Swiat* swiat, int x, int y) : Zwierze(swiat,x,y, TypOrganizmu::Czlowiek,5,4)
+Czlowiek::Czlowiek(Swiat* swiat, Rng& rng, int x, int y) : Zwierze(swiat,rng, x,y, TypOrganizmu::Czlowiek,5,4)
 {
 	kierunek = Kierunek::brak;
 }

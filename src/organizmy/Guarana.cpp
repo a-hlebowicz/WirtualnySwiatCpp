@@ -1,6 +1,6 @@
 #include "Guarana.h"
 #include "../swiat/Swiat.h"
-Guarana::Guarana(Swiat* swiat, int x, int y): Roslina(swiat,x,y, TypOrganizmu::Guarana,0){}
+Guarana::Guarana(Swiat* swiat, Rng& rng, int x, int y): Roslina(swiat,rng,x,y, TypOrganizmu::Guarana,0){}
 
 void Guarana::kolizja(Organizm* inny)
 {

@@ -1,5 +1,6 @@
 #pragma once
 #include "../organizmy/Organizm.h"
+#include "Rng.h"
 #include <vector>
 #include <iostream>
 #include <list>
@@ -16,7 +17,7 @@ class Czlowiek;
 class Swiat
 {
 private:
-	std::mt19937 random;
+	Rng rng;
 	int tura;
 	int szerokosc;
 	int wysokosc;
@@ -60,7 +61,4 @@ public:
 	bool czyCzlowiekZyje();
 	void czlowiekUmiejetnosc();
 	void czlowiekSetWejscie(char c);
-	int losujInt(int min, int max);
-	bool losujProcent(double p);
-
 };

@@ -4,6 +4,6 @@ class Owca :
     public Zwierze
 {
 public:
-    Owca(Swiat* swiat, int x, int y);
+    Owca(Swiat* swiat, Rng& rng, int x, int y);
 };
 

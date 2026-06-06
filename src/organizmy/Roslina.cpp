@@ -1,7 +1,7 @@
 #include "Roslina.h"
 #include "../swiat/Swiat.h"
 //#define SZANSA_NA_ROZPRZESTRZENIENIE 20;
-Roslina::Roslina(Swiat* swiat, int x, int y, TypOrganizmu typOrganizmu, int sila) : Organizm(swiat, x, y, typOrganizmu, sila, 0) {
+Roslina::Roslina(Swiat* swiat, Rng& rng, int x, int y, TypOrganizmu typOrganizmu, int sila) : Organizm(swiat,rng , x, y, typOrganizmu, sila, 0) {
 }
 
 void Roslina::akcja() {

@@ -1,7 +1,7 @@
 #include "WilczeJagody.h"
 #include "../swiat/Swiat.h"
 
-WilczeJagody::WilczeJagody(Swiat* swiat, int x, int y) : Roslina(swiat, x, y, TypOrganizmu::WilczeJagody, 99)
+WilczeJagody::WilczeJagody(Swiat* swiat, Rng& rng, int x, int y) : Roslina(swiat, rng, x, y, TypOrganizmu::WilczeJagody, 99)
 {
 
 }

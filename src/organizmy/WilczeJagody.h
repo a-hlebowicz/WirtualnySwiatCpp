@@ -4,6 +4,6 @@ class WilczeJagody :
     public Roslina
 {
 public:
-    WilczeJagody(Swiat* swiat, int x, int y);
+    WilczeJagody(Swiat* swiat, Rng& rng, int x, int y);
 };
 

@@ -1,6 +1,6 @@
 #include "BarszczSosnowskiego.h"
 #include "../swiat/Swiat.h"
-BarszczSosnowskiego::BarszczSosnowskiego(Swiat* swiat, int x, int y):Roslina(swiat,x,y, TypOrganizmu::BarszczSosnowskiego,90)
+BarszczSosnowskiego::BarszczSosnowskiego(Swiat* swiat, Rng& rng, int x, int y):Roslina(swiat,rng, x,y, TypOrganizmu::BarszczSosnowskiego,90)
 {
 }
 void BarszczSosnowskiego::akcja(){

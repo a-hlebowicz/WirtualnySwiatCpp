@@ -4,7 +4,7 @@ class Zolw :
     public Zwierze
 {
 public:
-    Zolw(Swiat* swiat, int x, int y);
+    Zolw(Swiat* swiat, Rng& rng, int x, int y);
     void akcja() ;
     void kolizja(Organizm* organizm) ;
 };

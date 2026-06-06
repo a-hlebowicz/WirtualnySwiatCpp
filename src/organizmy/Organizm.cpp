@@ -1,14 +1,32 @@
 #include "Organizm.h"
 #include "../swiat/Swiat.h"
 #include <stdexcept>
-Organizm::Organizm(Swiat* swiat, int x, int y, TypOrganizmu typOrganizmu, int sila, int inicjatywa) {
-	polozenie.x = x;
-	polozenie.y = y;
-	this->typOrganizmu = typOrganizmu;
-	this->sila = sila;
-	this->inicjatywa = inicjatywa;
-	this->swiat = swiat;
-	wiek = 0;
+
+Wektor kierunekNaWektor(Kierunek k, int predkosc = 1) {
+	switch (k) {
+	case Kierunek::lewo:  return { -predkosc, 0 };
+	case Kierunek::prawo: return { predkosc, 0 };
+	case Kierunek::gora:  return { 0, -predkosc };
+	case Kierunek::dol:   return { 0,  predkosc };
+	default:              return { 0, 0 };
+	}
+}
+
+Kierunek losowyKierunek() {
+	
+}
+
+
+Organizm::Organizm(Swiat* swiat, Rng &rng, int x, int y, TypOrganizmu typOrganizmu, int sila, int inicjatywa) : 
+	swiat(swiat),
+	rng(rng),
+	polozenie{ x,y },
+	typOrganizmu(typOrganizmu),
+	sila(sila),
+	inicjatywa(inicjatywa),
+	wiek(0)
+{
+
 }
 
 TypOrganizmu Organizm::getTyp() const {

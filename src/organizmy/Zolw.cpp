@@ -1,6 +1,6 @@
 #include "Zolw.h"
 #include "../swiat/Swiat.h"
-Zolw::Zolw(Swiat* swiat, int x, int y) : Zwierze(swiat, x, y, TypOrganizmu::Zolw, 2, 1) {}
+Zolw::Zolw(Swiat* swiat, Rng& rng, int x, int y) : Zwierze(swiat, rng, x, y, TypOrganizmu::Zolw, 2, 1) {}
 void Zolw::akcja()
 {
 	postarzWiek();

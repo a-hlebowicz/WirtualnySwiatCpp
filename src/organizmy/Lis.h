@@ -4,7 +4,7 @@ class Lis :
     public Zwierze
 {
 public:
-    Lis(Swiat* swiat, int x, int y);  
+    Lis(Swiat* swiat, Rng& rng, int x, int y);
     void akcja() ;
     Kierunek wybierzKierunekLis() ;
 };

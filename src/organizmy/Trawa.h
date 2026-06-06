@@ -4,6 +4,6 @@ class Trawa :
     public Roslina  
 {
 public:
-    Trawa(Swiat* swiat,int x, int y);
+    Trawa(Swiat* swiat, Rng& rng, int x, int y);
 };
 

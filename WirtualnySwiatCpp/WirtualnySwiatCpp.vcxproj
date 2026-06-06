@@ -102,6 +102,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -137,6 +138,7 @@
     <ClInclude Include="..\src\organizmy\Wilk.h" />
     <ClInclude Include="..\src\organizmy\Zolw.h" />
     <ClInclude Include="..\src\organizmy\Zwierze.h" />
+    <ClInclude Include="..\src\swiat\Rng.h" />
     <ClInclude Include="..\src\swiat\Swiat.h" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +157,7 @@
     <ClCompile Include="..\src\organizmy\Wilk.cpp" />
     <ClCompile Include="..\src\organizmy\Zolw.cpp" />
     <ClCompile Include="..\src\organizmy\Zwierze.cpp" />
+    <ClCompile Include="..\src\swiat\Rng.cpp" />
     <ClCompile Include="..\src\swiat\Swiat.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -2,11 +2,10 @@
 #include <iostream>
 #include "../swiat/Swiat.h"
 
-Zwierze::Zwierze(Swiat* swiat, int x, int y, TypOrganizmu typOrganizmu, int sila, int inicjatywa) : Organizm(swiat, x, y, typOrganizmu, sila, inicjatywa)
+Zwierze::Zwierze(Swiat* swiat, Rng& rng , int x, int y, TypOrganizmu typOrganizmu, int sila, int inicjatywa) : Organizm(swiat, rng, x, y, typOrganizmu, sila, inicjatywa)
 {
 	predkosc = 1;
 }
-
 Kierunek Zwierze::wybierzKierunek()
 {
 	Kierunek kierunek= Kierunek::brak;
@@ -16,12 +15,8 @@ Kierunek Zwierze::wybierzKierunek()
 			return Kierunek::brak;
 			std::cout << "nie znaleziono kierunku ";
 		}
-		int a = swiat->losujInt(0,3);
-		if (a == 0) { x1 = predkosc; y1 = 0; kierunek = Kierunek::prawo; }
-		if (a == 1) { x1 = -predkosc; y1 = 0; kierunek = Kierunek::lewo; }
-		if (a == 2) { x1 = 0; y1 = -predkosc; kierunek = Kierunek::gora; }
-		if (a == 3) { x1 = 0; y1 = predkosc; kierunek = Kierunek::dol; }
-		if (swiat->czyRuchMozliwy(getX() + x1, getY() + y1))break;
+		auto [dx, dy] = kierunekNaWektor(rng.losowyKierunek());
+		if (swiat->czyRuchMozliwy(getX() + dx, getY() + dy))break;
 		i++;
 	}
 	return kierunek;

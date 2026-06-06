@@ -4,7 +4,7 @@ class Mlecz :
     public Roslina
 {
 public:
-    Mlecz(Swiat* swiat, int x, int y);
+    Mlecz(Swiat* swiat, Rng& rng, int x, int y);
     void akcja() override;
 };
 

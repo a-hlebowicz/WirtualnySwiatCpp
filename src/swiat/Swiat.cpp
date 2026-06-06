@@ -17,11 +17,9 @@
 Swiat::Swiat(int szerokosc, int wysokosc) {
 	this->szerokosc = szerokosc++; // aby indeksowac od 1 nie od 0
 	this->wysokosc = wysokosc++; 
-	tura = 0;	
+	tura = 0;
 	czlowiek = nullptr;
 	mapaOrganizmow = std::vector< std::vector<Organizm*> >(szerokosc, std::vector<Organizm*>(wysokosc, nullptr));
-	std::random_device rd;
-	rng.seed(rd());
 }
 
 Organizm* Swiat::dodajCzlowieka(int x, int y) {
@@ -143,27 +141,27 @@ bool Swiat::jestZwierzeciem(Organizm* organizm)
 
 void Swiat::ustawSwiat()
 {
-	dodajOrganizm(TypOrganizmu::Czlowiek, losujInt(1,20), losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Wilk, losujInt(1, 20), losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Wilk, losujInt(1, 20), losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Owca, losujInt(1, 20), losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Owca, losujInt(1, 20), losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Zolw, losujInt(1, 20), losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Zolw, losujInt(1, 20), losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Antylopa, losujInt(1, 20), losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Antylopa, losujInt(1, 20), losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Lis, losujInt(1, 20), losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Lis, losujInt(1, 20), losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Trawa, losujInt(1, 20), losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Trawa, losujInt(1, 20), losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Mlecz, losujInt(1, 20), losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Mlecz, losujInt(1, 20), losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::WilczeJagody, losujInt(1, 20), losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::WilczeJagody, losujInt(1, 20), losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::BarszczSosnowskiego, losujInt(1, 20), losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::BarszczSosnowskiego, losujInt(1, 20), losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Guarana, losujInt(1, 20), losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Guarana, losujInt(1, 20), losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Czlowiek, rng.losujInt(1,20), rng.losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Wilk, rng.losujInt(1, 20), rng.losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Wilk, rng.losujInt(1, 20), rng.losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Owca, rng.losujInt(1, 20), rng.losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Owca, rng.losujInt(1, 20), rng.losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Zolw, rng.losujInt(1, 20), rng.losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Zolw, rng.losujInt(1, 20), rng.losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Antylopa, rng.losujInt(1, 20), rng.losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Antylopa, rng.losujInt(1, 20), rng.losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Lis, rng.losujInt(1, 20), rng.losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Lis, rng.losujInt(1, 20), rng.losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Trawa, rng.losujInt(1, 20), rng.losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Trawa, rng.losujInt(1, 20), rng.losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Mlecz, rng.losujInt(1, 20), rng.losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Mlecz, rng.losujInt(1, 20), rng.losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::WilczeJagody, rng.losujInt(1, 20), rng.losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::WilczeJagody, rng.losujInt(1, 20), rng.losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::BarszczSosnowskiego, rng.losujInt(1, 20), rng.losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::BarszczSosnowskiego, rng.losujInt(1, 20), rng.losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Guarana, rng.losujInt(1, 20), rng.losujInt(1, 20));
+	dodajOrganizm(TypOrganizmu::Guarana, rng.losujInt(1, 20), rng.losujInt(1, 20));
 }
 
 void Swiat::wykonajTure() {
@@ -254,7 +252,7 @@ koordynaty2 Swiat::znajdzWolnePole(Organizm* organizm)
 			pole.x = organizm->getX()+0; pole.y = organizm->getY() + 0;
 			return pole;
 		}
-		int a = losujInt(0,3);
+		int a = rng.losujInt(0,3);
 		if (a == 0) { x1 = 1; y1 = 0; }
 		if (a == 1) { x1 = -1; y1 = 0; }
 		if (a == 2) { x1 = 0; y1 = 1; }
@@ -285,16 +283,6 @@ void Swiat::czlowiekSetWejscie(char c) {
 	czlowiek->setWejscie(c);
 }
 
-//=============================
-
-int Swiat::losujInt(int min, int max) {
-	std::uniform_int_distribution<int> rozklad(min, max);
-	return rozklad(rng);
-}
-bool Swiat::losujProcent(double p) {
-	std::bernoulli_distribution rozklad(p/100);
-	return rozklad(rng);
-}
 
 
 //=============================

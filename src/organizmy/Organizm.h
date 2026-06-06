@@ -1,5 +1,21 @@
 #pragma once
 
+enum class Kierunek {
+	brak,
+	lewo,
+	prawo,
+	gora,
+	dol,
+	umiejetnosc
+};
+
+struct Wektor
+{
+	int x;
+	int y;
+};
+
+
 enum class TypOrganizmu {
 	Czlowiek,
 	Antylopa,
@@ -15,11 +31,14 @@ enum class TypOrganizmu {
 };
 char typNaZnak(TypOrganizmu t);
 TypOrganizmu znakNaTyp(char znak);
+Wektor kierunekNaWektor(Kierunek k, int predkosc = 1);
+Kierunek losowyKierunek();
 struct koordynaty {
 	int x;
 	int y;
 };
 class Swiat;
+class Rng;
 class Organizm
 {
 	koordynaty polozenie;
@@ -29,8 +48,9 @@ class Organizm
 	int wiek;
 protected:
 	 Swiat* swiat;
+	 Rng& rng;
 public:
-	Organizm(Swiat* swiat, int x, int y,TypOrganizmu typOrganizmu, int sila, int inicjatywa);
+	Organizm(Swiat* swiat, Rng& rng, int x, int y,TypOrganizmu typOrganizmu, int sila, int inicjatywa);
 
 	virtual void akcja() = 0;
 	virtual void kolizja(Organizm* inny) = 0;

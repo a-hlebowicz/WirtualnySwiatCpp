@@ -6,7 +6,7 @@ class Czlowiek :
     Kierunek kierunek;
     char wejscie;
     int umiejetnosc;
-public: Czlowiek(Swiat* swiat, int x, int y);
+public: Czlowiek(Swiat* swiat, Rng& rng, int x, int y);
       void akcja();
       Kierunek wybierzKierunekCzlowiek(char wejscie);
       void setWejscie(char c);

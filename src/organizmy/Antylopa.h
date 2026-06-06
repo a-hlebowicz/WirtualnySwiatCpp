@@ -4,7 +4,7 @@ class Antylopa :
     public Zwierze
 {
 public:
-    Antylopa(Swiat* swiat, int x, int y);
+    Antylopa(Swiat* swiat, Rng& rng,int x, int y);
     void kolizja(Organizm* atakujacy);
 };
 
