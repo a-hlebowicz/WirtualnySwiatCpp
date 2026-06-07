@@ -8,6 +8,7 @@
 #include <queue>
 #include <conio.h>
 #include <random>
+#include <optional>
 struct koordynaty2 { //nie dzialalo dla zwyklych koordynatow
 	int x;
 	int y;
@@ -55,7 +56,7 @@ public:
 	void zastapOrganizm(Organizm* atakujacy, Organizm* broniacy);
 	bool jestZwierzeciem(Organizm* organizm);
 	//void komunikat(Organizm* organizm, std::string text, Organizm* organizm2, std::strin text2);
-	koordynaty2 znajdzWolnePole(Organizm* organizm);
+	std::optional<koordynaty> znajdzWolnePole(Organizm* organizm);
 	void zapiszDoPliku();
 	void wczytajPlik(std::string& nazwaPliku, Organizm* czlowiek);
 	bool czyCzlowiekZyje();

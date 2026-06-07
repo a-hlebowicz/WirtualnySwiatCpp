@@ -27,15 +27,14 @@ void Lis::akcja()
 Kierunek Lis::wybierzKierunekLis()
 {
 	Kierunek kierunek = Kierunek::brak;
-	//if (!swiat->czySasiadujaceWolne(getX(), getY()))return kierunek;
-	int i=0;
-	while (1) {
-		if (i >= 50)return Kierunek::brak;
-		auto [dx, dy] = kierunekNaWektor(rng.losowyKierunek());
-		if (swiat->czyRuchMozliwy(getX() + dx, getY() + dy)) 
-		if(swiat->getMapaOrganizmow()[getX() + dx][getY() + dy]==nullptr || swiat->getMapaOrganizmow()[getX()+dx][getY()+dy]->getSila()<=getSila())break;
-		i++;
+	for (int i = 0;ILE_PROB > i;i++) {
+		kierunek = rng.losowyKierunek();
+		auto [dx, dy] = kierunekNaWektor(kierunek);
+		if (swiat->czyRuchMozliwy(getX() + dx, getY() + dy))
+			if (swiat->getMapaOrganizmow()[getX() + dx][getY() + dy] == nullptr || 
+				swiat->getMapaOrganizmow()[getX() + dx][getY() + dy]->getSila() <= getSila()) return kierunek;
 	}
-	return kierunek;
+	std::cout << "nie znaleziono kierunku ";
+	return Kierunek::brak;
 }
 ;

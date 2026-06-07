@@ -14,6 +14,7 @@
 #include <Windows.h>
 
 
+
 Swiat::Swiat(int szerokosc, int wysokosc) {
 	this->szerokosc = szerokosc++; // aby indeksowac od 1 nie od 0
 	this->wysokosc = wysokosc++; 
@@ -205,21 +206,22 @@ void Swiat::przestawOrganizm(Organizm* organizm, int x1, int y1)
 	
 }
 void Swiat::przegonOrganizm(Organizm* atakujacy, Organizm* broniacy) {
-	/*atakujacy->setX(broniacy->getX());
-	atakujacy->setY(broniacy->getY());
-	mapaOrganizmow[atakujacy->getX()][atakujacy->getY()] = atakujacy;*/
+	auto pole=znajdzWolnePole(broniacy);
+	if (!pole) {
 
-	koordynaty2 pole=znajdzWolnePole(broniacy);
+		return;
+	}
 	int stary_x = broniacy->getX(), stary_y = broniacy->getY();
-	przestawOrganizm(broniacy, pole.x, pole.y);
+	przestawOrganizm(broniacy, pole->x, pole->y);
 	przestawOrganizm(atakujacy, stary_x, stary_y);
-	/*broniacy->setX(pole.x);
-	broniacy->setY(pole.y);
-	mapaOrganizmow[broniacy->getX()][broniacy->getY()] = broniacy;*/
 }
 void Swiat::tarczaPrzegon(Organizm* atakujacy, Organizm* broniacy) {
-	koordynaty2 pole = znajdzWolnePole(broniacy);
-	przestawOrganizm(atakujacy, pole.x, pole.y);
+	auto pole = znajdzWolnePole(broniacy);
+	if (!pole) {
+
+		return;
+	}
+	przestawOrganizm(atakujacy, pole->x, pole->y);
 }
 void Swiat::usunOrganizmyZListy() {
 	while (!doUsuniecia.empty()) {
@@ -242,27 +244,15 @@ void Swiat::zastapOrganizm(Organizm* atakujacy, Organizm* broniacy)
 	przestawOrganizm(atakujacy, nowy_x, nowy_y);
 }
 
-koordynaty2 Swiat::znajdzWolnePole(Organizm* organizm)
+std::optional<koordynaty> Swiat::znajdzWolnePole(Organizm* organizm)
 {
-	int x1 = 0, y1 = 0, i=0;
-	koordynaty2 pole;
-	while (1) {
-		if (i > 50) {
-			komunikat(organizm, "nie znaleziono wolnego pola ");
-			pole.x = organizm->getX()+0; pole.y = organizm->getY() + 0;
-			return pole;
-		}
-		int a = rng.losujInt(0,3);
-		if (a == 0) { x1 = 1; y1 = 0; }
-		if (a == 1) { x1 = -1; y1 = 0; }
-		if (a == 2) { x1 = 0; y1 = 1; }
-		if (a == 3) { x1 = 0; y1 = -1; }
-		if (czyPoleWolne(organizm->getX() + x1, organizm->getY() + y1)) {
-			pole.x = organizm->getX() + x1;
-			pole.y = organizm->getY() + y1;
-			return pole;
-		}
+	for (int i = 0; i < 50; i++) {
+		auto [dx, dy] = kierunekNaWektor(rng.losowyKierunek());
+		int x = organizm->getX() + dx;
+		int y = organizm->getY() + dy;
+		if (czyPoleWolne(x, y)) return koordynaty{ x, y };
 	}
+	return std::nullopt;
 }
 
 

@@ -2,14 +2,14 @@
 #include <iostream>
 #include "../swiat/Swiat.h"
 
+
 Zwierze::Zwierze(Swiat* swiat, Rng& rng , int x, int y, TypOrganizmu typOrganizmu, int sila, int inicjatywa) : Organizm(swiat, rng, x, y, typOrganizmu, sila, inicjatywa)
 {
 	predkosc = 1;
 }
 Kierunek Zwierze::wybierzKierunek()
 {
-	Kierunek kierunek= Kierunek::brak;
-	int x1 = 0, y1 = 0, i=0;
+	/*int x1 = 0, y1 = 0, i=0;
 	while (1) {
 		if (i >= 20) {
 			return Kierunek::brak;
@@ -19,7 +19,15 @@ Kierunek Zwierze::wybierzKierunek()
 		if (swiat->czyRuchMozliwy(getX() + dx, getY() + dy))break;
 		i++;
 	}
-	return kierunek;
+	return kierunek;*/
+	Kierunek kierunek = Kierunek::brak;
+	for (int i = 0;ILE_PROB > i;i++) {
+		kierunek = rng.losowyKierunek();
+		auto [dx, dy] = kierunekNaWektor(kierunek, predkosc);
+		if (swiat->czyRuchMozliwy(getX() + dx, getY() + dy)) return kierunek;
+	}
+	std::cout << "nie znaleziono kierunku ";
+	return Kierunek::brak;
 }
 void Zwierze::akcja() {
 	if (getWiek() == 0) {
@@ -46,15 +54,10 @@ void Zwierze::akcja() {
 void Zwierze::kolizja(Organizm* atakujacy) {
 	if (this->getTyp() == atakujacy->getTyp()) {
 		//dziecko
-		if (swiat->czySasiadujaceWolne(this->getX(), this->getY())) {
-			koordynaty2 pole = swiat->znajdzWolnePole(this);	
-			int x1 = pole.x, y1 = pole.y;	
-			swiat->dodajOrganizm(getTyp(), x1,  y1);
-			swiat->komunikat(this, "sie rozmnozyl");	
-		}
-		//else swiat->komunikat(this, "nie ma miejsca na rozmnazanie");	
-
-
+		auto pole = swiat->znajdzWolnePole(this);	
+		if (!pole) return;	
+		swiat->dodajOrganizm(getTyp(), pole->x,  pole->y);
+		swiat->komunikat(this, "sie rozmnozyl");	
 	}
 	else if (atakujacy->getSila() >= this->getSila()) {
 		swiat->komunikat(atakujacy, "atakuje ");

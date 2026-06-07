@@ -1,5 +1,6 @@
 #pragma once
 #include "Organizm.h"
+#define ILE_PROB 20
 
 class Zwierze :
     public Organizm

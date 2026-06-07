@@ -11,14 +11,12 @@ void Roslina::akcja() {
 		return;
 	}
 	postarzWiek();
-	if (rng.losujProcent(5)) {
-		if (swiat->czySasiadujaceWolne(getX(), getY()) == true) {
-			koordynaty2 pole = swiat->znajdzWolnePole(this);
-			int x1 = pole.x, y1 = pole.y;
-			swiat->dodajOrganizm(this->getTyp(), x1, y1);
-			swiat->komunikat(this, "sie rozprzestrzenil");
-		}
-	}
+
+	if (!rng.losujProcent(5))return;
+	auto pole = swiat->znajdzWolnePole(this);
+	if (!pole) return;
+	swiat->dodajOrganizm(this->getTyp(), pole->x, pole->y);
+	swiat->komunikat(this, "sie rozprzestrzenil");
 }
 void Roslina::kolizja(Organizm* inny) {
 	if (this == inny)
