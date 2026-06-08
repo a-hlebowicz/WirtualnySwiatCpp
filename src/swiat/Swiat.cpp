@@ -173,20 +173,17 @@ void Swiat::wykonajTure() {
 	}
 	usunOrganizmyZListy();
 }
-bool Swiat::czyRuchMozliwy (int x, int y) {
+bool Swiat::czyRuchMozliwy (int x, int y) const {
 	if (x<1 || x>szerokosc || y<1 || y>wysokosc)return false;
 	return true;
 }
-bool Swiat::czyPoleWolne(int x, int y) {	
+bool Swiat::czyPoleWolne(int x, int y) const {
 	if (x<1 || x>szerokosc || y<1 || y>wysokosc)return false;
 	if (mapaOrganizmow[x][y] == nullptr)return true;
 	return false;
 }
-bool Swiat::czySasiadujaceWolne(int x, int y) {
-	bool a = czyPoleWolne(x + 1, y) + czyPoleWolne(x, y + 1) + czyPoleWolne(x - 1, y) + czyPoleWolne(x, y - 1);
-	return a;
-}
-bool Swiat::czySasiadujaceWolnePredkosc(int x, int y, int predkosc) {
+
+bool Swiat::czySasiadujaceWolne(int x, int y, int predkosc) const {
 	bool a = czyPoleWolne(x + predkosc, y) + czyPoleWolne(x, y + predkosc) + czyPoleWolne(x - predkosc, y) + czyPoleWolne(x, y - predkosc);
 	return a;
 }
@@ -237,15 +234,13 @@ void Swiat::usunOrganizmyZListy() {
 }
 
 
-void Swiat::zastapOrganizm(Organizm* atakujacy, Organizm* broniacy)
-{
+void Swiat::zastapOrganizm(Organizm* atakujacy, Organizm* broniacy) {
 	int nowy_x = broniacy->getX(), nowy_y = broniacy->getY();
 	usunOrganizm(broniacy);
 	przestawOrganizm(atakujacy, nowy_x, nowy_y);
 }
 
-std::optional<koordynaty> Swiat::znajdzWolnePole(Organizm* organizm)
-{
+std::optional<koordynaty> Swiat::znajdzWolnePole(Organizm* organizm) {
 	for (int i = 0; i < 50; i++) {
 		auto [dx, dy] = kierunekNaWektor(rng.losowyKierunek());
 		int x = organizm->getX() + dx;
@@ -257,7 +252,7 @@ std::optional<koordynaty> Swiat::znajdzWolnePole(Organizm* organizm)
 
 
 
-bool Swiat::czyCzlowiekZyje() {
+bool Swiat::czyCzlowiekZyje() const {
 	if (czlowiek != nullptr)return true;
 	return false;
 }

@@ -12,4 +12,5 @@ public:
     int losujInt(int min, int max);
     bool losujProcent(double p);
     Kierunek losowyKierunek();
+    int losujIndeks(int max);
 };

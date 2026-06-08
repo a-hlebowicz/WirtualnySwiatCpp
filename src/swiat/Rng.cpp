@@ -23,3 +23,7 @@ Kierunek Rng::losowyKierunek() {
     }
     return Kierunek::brak;
 }
+
+int Rng::losujIndeks(int max) {
+    return Rng::losujInt(0, max - 1);
+}

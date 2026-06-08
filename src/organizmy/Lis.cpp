@@ -1,40 +1,47 @@
 #include "Lis.h"
 #include "../swiat/Swiat.h"
 Lis::Lis(Swiat* swiat, Rng& rng, int x, int y) : Zwierze(swiat, rng, x, y, TypOrganizmu::Lis, 3, 7) {}
-void Lis::akcja()
-{
+
+std::optional<Wektor> Lis::zaplanujRuchLis() {
+	const std::array<Kierunek, 4> wszystkieKierunki = {
+		Kierunek::lewo, Kierunek::prawo, Kierunek::gora, Kierunek::dol
+	};
+	std::vector<Wektor> mozliweWektory;
+	mozliweWektory.reserve(4);
+
+	for (Kierunek k : wszystkieKierunki) {
+		Wektor w = kierunekNaWektor(k);
+		if (swiat->czyRuchMozliwy(getX() + w.x, getY() + w.y))
+			if (swiat->getMapaOrganizmow()[getX() + w.x][getY() + w.y] == nullptr ||
+				swiat->getMapaOrganizmow()[getX() + w.x][getY() + w.y]->getSila() <= getSila())mozliweWektory.push_back(w);
+	}
+
+	if (mozliweWektory.empty()) {
+		return std::nullopt;
+	}
+
+	int rngI = rng.losujIndeks(mozliweWektory.size());
+	return mozliweWektory[rngI];
+}
+
+
+
+void Lis::akcja() {
 	if (getWiek() == 0) {
 		postarzWiek();
 		return;
 	}
 	postarzWiek();
-	Kierunek kierunek = wybierzKierunekLis();
-	int x1=0, y1=0;
-	if (kierunek == Kierunek::brak) {
+
+	auto w = zaplanujRuchLis();
+	if (!w) {
 		swiat->komunikat(this, "nie moze sie ruszyc ");
 		return;
 	}
-	if (kierunek == Kierunek::lewo) x1 = -1;
-	if (kierunek == Kierunek::prawo)x1 = 1;
-	if (kierunek == Kierunek::gora)y1 = -1;
-	if (kierunek == Kierunek::dol)y1 = 1;
-	if (swiat->getMapaOrganizmow()[getX() + x1][getY() + y1] == nullptr)swiat->przestawOrganizm(this, getX() + x1, getY() + y1);
-	else {
-		Organizm* inny = swiat->getMapaOrganizmow()[getX() + x1][getY() + y1];
-		inny->kolizja(this);
-	}
+	auto [dx, dy] = *w;
+
+	Organizm* inny = swiat->getMapaOrganizmow()[getX() + dx][getY() + dy];  //zmienic interfejs
+	if (inny == nullptr)swiat->przestawOrganizm(this, getX() + dx, getY() + dy);
+	else inny->kolizja(this);
 }
-Kierunek Lis::wybierzKierunekLis()
-{
-	Kierunek kierunek = Kierunek::brak;
-	for (int i = 0;ILE_PROB > i;i++) {
-		kierunek = rng.losowyKierunek();
-		auto [dx, dy] = kierunekNaWektor(kierunek);
-		if (swiat->czyRuchMozliwy(getX() + dx, getY() + dy))
-			if (swiat->getMapaOrganizmow()[getX() + dx][getY() + dy] == nullptr || 
-				swiat->getMapaOrganizmow()[getX() + dx][getY() + dy]->getSila() <= getSila()) return kierunek;
-	}
-	std::cout << "nie znaleziono kierunku ";
-	return Kierunek::brak;
-}
-;
+

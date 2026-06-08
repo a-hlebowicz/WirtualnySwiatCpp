@@ -6,6 +6,6 @@ class Lis :
 public:
     Lis(Swiat* swiat, Rng& rng, int x, int y);
     void akcja() ;
-    Kierunek wybierzKierunekLis() ;
+    std::optional<Wektor> zaplanujRuchLis();
 };
 
