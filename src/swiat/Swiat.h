@@ -38,7 +38,7 @@ public:
 	int getTura() const { return tura; }
 	const std::vector< std::vector< Organizm* > >& getMapaOrganizmow() const { return mapaOrganizmow; }
 	//std::list<std::unique_ptr<Organizm>>& getListaOrganizmow() const { return listaOrganizmow; }; nikt tego i tak nie uzywa?
-	void ustawSwiat();
+	void ustawSwiat(); 
 	void wykonajTure();
 	Organizm* dodajOrganizm(TypOrganizmu typ, int x, int y);
 	Organizm* dodajCzlowieka(int x, int y);
