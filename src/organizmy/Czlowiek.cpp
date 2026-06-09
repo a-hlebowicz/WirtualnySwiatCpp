@@ -3,6 +3,8 @@
 Czlowiek::Czlowiek(Swiat* swiat, Rng& rng, int x, int y) : Zwierze(swiat,rng, x,y, TypOrganizmu::Czlowiek,5,4)
 {
 	kierunek = Kierunek::brak;
+	wejscie = '0';
+	umiejetnosc = 0;
 }
 
 void Czlowiek::akcja()
