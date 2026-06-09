@@ -37,6 +37,7 @@ public:
 	int getWysokosc() const { return wysokosc; }
 	int getTura() const { return tura; }
 	const std::vector< std::vector< Organizm* > >& getMapaOrganizmow() const { return mapaOrganizmow; }
+	Organizm* getOrganizmZMapy(int x, int y) const;
 	//std::list<std::unique_ptr<Organizm>>& getListaOrganizmow() const { return listaOrganizmow; }; nikt tego i tak nie uzywa?
 	void ustawSwiat(); 
 	void wykonajTure();
@@ -49,6 +50,7 @@ public:
 	void usunOrganizmyZListy();	
 	bool czyRuchMozliwy(int x, int y) const;
 	bool czyPoleWolne(int x, int y) const;
+	bool czyWPlanszy(int x, int y) const;
 	bool czySasiadujaceWolne(int x, int y, int predkosc = 1)const;
 	void komunikat(Organizm* organizm, std::string text);
 	void wyswietlKomunikaty();

@@ -39,9 +39,9 @@ void Lis::akcja() {
 		return;
 	}
 	auto [dx, dy] = *w;
-
-	Organizm* inny = swiat->getMapaOrganizmow()[getX() + dx][getY() + dy];  //zmienic interfejs
-	if (inny == nullptr)swiat->przestawOrganizm(this, getX() + dx, getY() + dy);
+	int x = getX() + dx, y = getY() + dy;
+	Organizm* inny = swiat->getOrganizmZMapy(x, y);
+	if (inny == nullptr)swiat->przestawOrganizm(this, x, y);
 	else inny->kolizja(this);
 }
 

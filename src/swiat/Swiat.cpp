@@ -23,6 +23,11 @@ Swiat::Swiat(int szerokosc, int wysokosc) {
 	mapaOrganizmow = std::vector< std::vector<Organizm*> >(szerokosc, std::vector<Organizm*>(wysokosc, nullptr));
 }
 
+Organizm* Swiat::getOrganizmZMapy(int x, int y) const {
+	if (!czyWPlanszy(x, y)) return nullptr;
+	return mapaOrganizmow[x][y];
+}
+
 Organizm* Swiat::dodajCzlowieka(int x, int y) {
 	std::unique_ptr<Czlowiek> czlowiek  = std::make_unique <Czlowiek>(this, this->rng, x, y);
 	Organizm* obs = czlowiek.get();
@@ -174,6 +179,9 @@ void Swiat::wykonajTure() {
 	usunOrganizmyZListy();
 }
 bool Swiat::czyRuchMozliwy (int x, int y) const {
+	return czyWPlanszy(x,y);
+}
+bool Swiat::czyWPlanszy(int x, int y) const {
 	if (x<1 || x>szerokosc || y<1 || y>wysokosc)return false;
 	return true;
 }
@@ -241,13 +249,25 @@ void Swiat::zastapOrganizm(Organizm* atakujacy, Organizm* broniacy) {
 }
 
 std::optional<koordynaty> Swiat::znajdzWolnePole(Organizm* organizm) {
-	for (int i = 0; i < 50; i++) {
-		auto [dx, dy] = kierunekNaWektor(rng.losowyKierunek());
-		int x = organizm->getX() + dx;
-		int y = organizm->getY() + dy;
-		if (czyPoleWolne(x, y)) return koordynaty{ x, y };
+	const std::array<Kierunek, 4> wszystkieKierunki = {
+		Kierunek::lewo, Kierunek::prawo, Kierunek::gora, Kierunek::dol
+	};
+	std::vector<koordynaty> wolnePola;
+	wolnePola.reserve(4);
+
+	for (Kierunek k : wszystkieKierunki) {
+		Wektor w = kierunekNaWektor(k);
+		int x = organizm->getX() + w.x;
+		int y = organizm->getY() + w.y;
+		if (czyPoleWolne(x, y)) wolnePola.push_back(koordynaty{ x, y });
 	}
-	return std::nullopt;
+
+	if (wolnePola.empty()) {
+		return std::nullopt;
+	}
+
+	int rngI = rng.losujIndeks(wolnePola.size());
+	return wolnePola[rngI];
 }
 
 
