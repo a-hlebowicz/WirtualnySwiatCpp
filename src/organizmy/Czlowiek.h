@@ -1,5 +1,6 @@
 #pragma once
 #include "Zwierze.h"
+#include <string>
 class Czlowiek :
     public Zwierze
 {

@@ -16,7 +16,7 @@
 
 
 Swiat::Swiat(int szerokosc, int wysokosc) {
-	this->szerokosc = szerokosc++; // aby indeksowac od 1 nie od 0
+	this->szerokosc = szerokosc++;
 	this->wysokosc = wysokosc++; 
 	tura = 0;
 	czlowiek = nullptr;
@@ -147,27 +147,32 @@ bool Swiat::jestZwierzeciem(Organizm* organizm)
 
 void Swiat::ustawSwiat()
 {
-	dodajOrganizm(TypOrganizmu::Czlowiek, rng.losujInt(1,20), rng.losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Wilk, rng.losujInt(1, 20), rng.losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Wilk, rng.losujInt(1, 20), rng.losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Owca, rng.losujInt(1, 20), rng.losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Owca, rng.losujInt(1, 20), rng.losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Zolw, rng.losujInt(1, 20), rng.losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Zolw, rng.losujInt(1, 20), rng.losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Antylopa, rng.losujInt(1, 20), rng.losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Antylopa, rng.losujInt(1, 20), rng.losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Lis, rng.losujInt(1, 20), rng.losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Lis, rng.losujInt(1, 20), rng.losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Trawa, rng.losujInt(1, 20), rng.losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Trawa, rng.losujInt(1, 20), rng.losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Mlecz, rng.losujInt(1, 20), rng.losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Mlecz, rng.losujInt(1, 20), rng.losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::WilczeJagody, rng.losujInt(1, 20), rng.losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::WilczeJagody, rng.losujInt(1, 20), rng.losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::BarszczSosnowskiego, rng.losujInt(1, 20), rng.losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::BarszczSosnowskiego, rng.losujInt(1, 20), rng.losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Guarana, rng.losujInt(1, 20), rng.losujInt(1, 20));
-	dodajOrganizm(TypOrganizmu::Guarana, rng.losujInt(1, 20), rng.losujInt(1, 20));
+	int p = szerokosc * wysokosc;
+
+	// liczba kazdego organizmu = sqrt(pole)/10
+	int n = static_cast<int>(std::sqrt(p) / 10);
+	if (n <= 0)n = 1;
+	
+	dodajOrganizm(TypOrganizmu::Czlowiek, rng.losujInt(1, szerokosc), rng.losujInt(1, wysokosc));
+
+	const std::array<TypOrganizmu, 10> gatunki = {
+		TypOrganizmu::Wilk,
+		TypOrganizmu::Owca,
+		TypOrganizmu::Zolw,
+		TypOrganizmu::Antylopa,
+		TypOrganizmu::Lis,
+		TypOrganizmu::Trawa,
+		TypOrganizmu::Mlecz,
+		TypOrganizmu::WilczeJagody,
+		TypOrganizmu::BarszczSosnowskiego,
+		TypOrganizmu::Guarana
+	};
+
+	for (TypOrganizmu typ : gatunki) {
+		for (int i = 0;n > i;i++) {
+			dodajOrganizm(typ, rng.losujInt(1, szerokosc), rng.losujInt(1, wysokosc));
+		}
+	}
 }
 
 void Swiat::wykonajTure() {

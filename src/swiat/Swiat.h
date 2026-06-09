@@ -9,6 +9,7 @@
 #include <conio.h>
 #include <random>
 #include <optional>
+#include <algorithm>
 struct koordynaty2 { //nie dzialalo dla zwyklych koordynatow
 	int x;
 	int y;

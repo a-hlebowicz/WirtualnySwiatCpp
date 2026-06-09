@@ -7,7 +7,7 @@ using namespace std;
 
 int main() {
 	unsigned char a = -1;
-	Swiat swiat(20,20);
+	Swiat swiat(50,50);
 	//Czlowiek czlowiek(&swiat, rand() % 20, rand() % 20);
 	cout << "nowa gra - 1" << endl << "wczytaj - 2" << endl;
 	while (a!='1' && a!='2')a = _getch();
