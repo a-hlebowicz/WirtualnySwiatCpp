@@ -25,7 +25,7 @@ add_executable(WirtualnySwiat
     src/organizmy/Wilk.cpp
     src/organizmy/Zolw.cpp
     src/organizmy/Zwierze.cpp
-)
+ "src/gui/App.h" "src/gui/App.cpp" "src/gui/Renderer.h" "src/gui/Renderer.cpp" "src/gui/Zasoby.h" "src/gui/Zasoby.cpp")
 
 target_link_libraries(WirtualnySwiat PRIVATE
     SFML::Graphics
