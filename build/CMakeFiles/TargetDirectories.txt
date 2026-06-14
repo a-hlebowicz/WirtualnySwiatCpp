@@ -1,3 +1,0 @@
-C:/Users/aleks/Desktop/WirtualnySwiatCpp/build/CMakeFiles/WirtualnySwiat.dir
-C:/Users/aleks/Desktop/WirtualnySwiatCpp/build/CMakeFiles/edit_cache.dir
-C:/Users/aleks/Desktop/WirtualnySwiatCpp/build/CMakeFiles/rebuild_cache.dir
