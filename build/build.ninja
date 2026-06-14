@@ -229,6 +229,15 @@ build CMakeFiles\WirtualnySwiat.dir\src\gui\Zasoby.cpp.obj: CXX_COMPILER__Wirtua
   TARGET_COMPILE_PDB = CMakeFiles\WirtualnySwiat.dir\
   TARGET_PDB = WirtualnySwiat.pdb
 
+build CMakeFiles\WirtualnySwiat.dir\src\organizmy\Typy.cpp.obj: CXX_COMPILER__WirtualnySwiat_unscanned_Debug C$:\Users\aleks\Desktop\WirtualnySwiatCpp\src\organizmy\Typy.cpp || cmake_object_order_depends_target_WirtualnySwiat
+  DEFINES = -DIMGUI_USER_CONFIG=\"imconfig-SFML.h\"
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd
+  INCLUDES = -external:IC:\Users\aleks\Desktop\WirtualnySwiatCpp\build\vcpkg_installed\x64-windows\include -external:W0
+  OBJECT_DIR = CMakeFiles\WirtualnySwiat.dir
+  OBJECT_FILE_DIR = CMakeFiles\WirtualnySwiat.dir\src\organizmy
+  TARGET_COMPILE_PDB = CMakeFiles\WirtualnySwiat.dir\
+  TARGET_PDB = WirtualnySwiat.pdb
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target WirtualnySwiat
@@ -237,7 +246,7 @@ build CMakeFiles\WirtualnySwiat.dir\src\gui\Zasoby.cpp.obj: CXX_COMPILER__Wirtua
 #############################################
 # Link the executable WirtualnySwiat.exe
 
-build WirtualnySwiat.exe: CXX_EXECUTABLE_LINKER__WirtualnySwiat_Debug CMakeFiles\WirtualnySwiat.dir\src\main.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\swiat\Swiat.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\swiat\Rng.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\Organizm.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\Antylopa.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\BarszczSosnowskiego.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\Czlowiek.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\Guarana.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\Lis.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\Mlecz.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\Owca.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\Roslina.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\Trawa.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\WilczeJagody.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\Wilk.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\Zolw.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\Zwierze.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\gui\App.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\gui\Renderer.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\gui\Zasoby.cpp.obj | vcpkg_installed\x64-windows\debug\lib\ImGui-SFML.lib vcpkg_installed\x64-windows\debug\lib\sfml-graphics-d.lib vcpkg_installed\x64-windows\debug\lib\sfml-window-d.lib vcpkg_installed\x64-windows\debug\lib\sfml-system-d.lib vcpkg_installed\x64-windows\debug\lib\imguid.lib
+build WirtualnySwiat.exe: CXX_EXECUTABLE_LINKER__WirtualnySwiat_Debug CMakeFiles\WirtualnySwiat.dir\src\main.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\swiat\Swiat.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\swiat\Rng.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\Organizm.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\Antylopa.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\BarszczSosnowskiego.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\Czlowiek.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\Guarana.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\Lis.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\Mlecz.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\Owca.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\Roslina.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\Trawa.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\WilczeJagody.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\Wilk.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\Zolw.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\Zwierze.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\gui\App.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\gui\Renderer.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\gui\Zasoby.cpp.obj CMakeFiles\WirtualnySwiat.dir\src\organizmy\Typy.cpp.obj | vcpkg_installed\x64-windows\debug\lib\ImGui-SFML.lib vcpkg_installed\x64-windows\debug\lib\sfml-graphics-d.lib vcpkg_installed\x64-windows\debug\lib\sfml-window-d.lib vcpkg_installed\x64-windows\debug\lib\sfml-system-d.lib vcpkg_installed\x64-windows\debug\lib\imguid.lib
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = vcpkg_installed\x64-windows\debug\lib\ImGui-SFML.lib  vcpkg_installed\x64-windows\debug\lib\sfml-graphics-d.lib  vcpkg_installed\x64-windows\debug\lib\sfml-window-d.lib  vcpkg_installed\x64-windows\debug\lib\sfml-system-d.lib  vcpkg_installed\x64-windows\debug\lib\imguid.lib  opengl32.lib  glu32.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
