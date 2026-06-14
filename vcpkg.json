@@ -1,0 +1,8 @@
+{
+    "name": "wirtualny-swiat",
+    "version": "0.6.0",
+    "dependencies": [
+        "sfml",
+        "imgui-sfml"
+    ]
+}
