@@ -318,48 +318,49 @@ void Swiat::wyswietlKomunikaty()
 }
 
 //================================
-void Swiat::zapiszDoPliku() {
-	std::string napis;
-	std::cout << "podaj nazwe pliku ";
-	std::cin >> napis;
-	std::string& nazwaPliku = napis;
-	std::ofstream plik(nazwaPliku);
-	if (plik.is_open()) {
-		plik << tura << std::endl;
-		for (const auto& organizm : listaOrganizmow) {
-			plik << organizm->getSymbol() << " ";
-			plik << organizm->getX() << " " <<organizm->getY() << " ";
-			plik << organizm->getSila() << " ";
-			plik << organizm->getWiek() << " ";
-			plik << std::endl;
-		}
-		plik << 'K';
-	}
-	else std::cout << "nie udalo sie otworzyc pliku";
-}
 
-void Swiat::wczytajPlik(std::string& nazwaPliku, Organizm* czlowiek)
-{
-	std::ifstream plik(nazwaPliku);
-	if (plik.is_open()) {
-		plik >> tura;
-		while (!plik.eof()) {
-			char symbol;
-			int x, y, sila, wiek;
-			plik >> symbol >> x >> y >> sila >> wiek;
-			if (symbol == 'K')break;
-			if (symbol == 'X') {
-				czlowiek->setX(x);
-				czlowiek->setY(y);
-				czlowiek->setSila(sila);
-				czlowiek->setWiek(wiek);
-			}
-			else {
-				Organizm* organizm = dodajOrganizm(znakNaTyp(symbol), x, y);
-				organizm->setSila(sila);
-				organizm->setWiek(wiek);
-			}
-		}
-	}
-}
+//void Swiat::zapiszDoPliku() {
+//	std::string napis;
+//	std::cout << "podaj nazwe pliku ";
+//	std::cin >> napis;
+//	std::string& nazwaPliku = napis;
+//	std::ofstream plik(nazwaPliku);
+//	if (plik.is_open()) {
+//		plik << tura << std::endl;
+//		for (const auto& organizm : listaOrganizmow) {
+//			plik << organizm->getSymbol() << " ";
+//			plik << organizm->getX() << " " <<organizm->getY() << " ";
+//			plik << organizm->getSila() << " ";
+//			plik << organizm->getWiek() << " ";
+//			plik << std::endl;
+//		}
+//		plik << 'K';
+//	}
+//	else std::cout << "nie udalo sie otworzyc pliku";
+//}
+//
+//void Swiat::wczytajPlik(std::string& nazwaPliku, Organizm* czlowiek)
+//{
+//	std::ifstream plik(nazwaPliku);
+//	if (plik.is_open()) {
+//		plik >> tura;
+//		while (!plik.eof()) {
+//			char symbol;
+//			int x, y, sila, wiek;
+//			plik >> symbol >> x >> y >> sila >> wiek;
+//			if (symbol == 'K')break;
+//			if (symbol == 'X') {
+//				czlowiek->setX(x);
+//				czlowiek->setY(y);
+//				czlowiek->setSila(sila);
+//				czlowiek->setWiek(wiek);
+//			}
+//			else {
+//				Organizm* organizm = dodajOrganizm(znakNaTyp(symbol), x, y);
+//				organizm->setSila(sila);
+//				organizm->setWiek(wiek);
+//			}
+//		}
+//	}
+//}
 
