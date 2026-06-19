@@ -1,6 +1,6 @@
 #pragma once
 #include <stdexcept>
-
+#include <array>
 enum class Kierunek {
 	brak,
 	lewo,
@@ -17,6 +17,7 @@ struct Wektor
 };
 
 
+
 enum class TypOrganizmu {
 	Czlowiek,
 	Antylopa,
@@ -29,6 +30,20 @@ enum class TypOrganizmu {
 	Guarana,
 	Trawa,
 	WilczeJagody
+};
+
+inline constexpr std::array wszystkieTypy = {
+	TypOrganizmu::Czlowiek,
+	TypOrganizmu::Antylopa,
+	TypOrganizmu::Lis,
+	TypOrganizmu::Owca,
+	TypOrganizmu::Wilk,
+	TypOrganizmu::Zolw,
+	TypOrganizmu::BarszczSosnowskiego,
+	TypOrganizmu::Mlecz,
+	TypOrganizmu::Guarana,
+	TypOrganizmu::Trawa,
+	TypOrganizmu::WilczeJagody
 };
 
 struct koordynaty {
