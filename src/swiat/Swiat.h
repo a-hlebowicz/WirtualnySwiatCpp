@@ -64,4 +64,5 @@ public:
 	bool czyCzlowiekZyje() const;
 	void czlowiekUmiejetnosc();
 	void czlowiekSetWejscie(char c);
+	bool czyCzlowiekZTarcza() const;
 };

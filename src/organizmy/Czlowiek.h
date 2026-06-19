@@ -1,6 +1,7 @@
 #pragma once
 #include "Zwierze.h"
 #include <string>
+static constexpr int PROG_TARCZY = 6;
 class Czlowiek :
     public Zwierze
 {
@@ -14,5 +15,6 @@ public: Czlowiek(Swiat* swiat, Rng& rng, int x, int y);
       void aktywujUmietnosc();
       int getUmiejetnosc();
       void kolizja(Organizm* atakujacy);
+      bool czyTarczaAktywna() const;
 };
 

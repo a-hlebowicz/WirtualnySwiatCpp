@@ -293,6 +293,9 @@ void Swiat::czlowiekSetWejscie(char c) {
 	czlowiek->setWejscie(c);
 }
 
+bool Swiat::czyCzlowiekZTarcza() const {
+	return czlowiek != nullptr && czlowiek->czyTarczaAktywna();
+}
 
 
 //=============================

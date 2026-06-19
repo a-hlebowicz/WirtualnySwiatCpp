@@ -61,9 +61,12 @@ int Czlowiek::getUmiejetnosc() {
 	return umiejetnosc;
 }
 void Czlowiek::kolizja(Organizm* atakujacy) {
-	if (umiejetnosc < 6) Zwierze::kolizja(atakujacy);
+	if (!czyTarczaAktywna()) Zwierze::kolizja(atakujacy);
 	else {
 		swiat->tarczaPrzegon(atakujacy, this);
 		swiat->komunikat(this, "przegania tarcza ");
 	}
+}
+bool Czlowiek::czyTarczaAktywna() const { 
+	return umiejetnosc >= PROG_TARCZY; 
 }
