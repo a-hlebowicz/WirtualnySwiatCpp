@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_library(swiat_logika STATIC
+    src/organizmy/Typy.cpp
     src/organizmy/Organizm.cpp
     src/organizmy/Zwierze.cpp
     src/organizmy/Roslina.cpp
@@ -41,3 +42,7 @@ target_link_libraries(WirtualnySwiat PRIVATE
     SFML::System
     ImGui-SFML::ImGui-SFML
 )
+
+add_custom_command(TARGET WirtualnySwiat POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/assets $<TARGET_FILE_DIR:WirtualnySwiat>/assets)

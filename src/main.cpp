@@ -1,16 +1,10 @@
-#include <iostream>
 #include "swiat/Swiat.h"
-#include "organizmy/Organizm.h"
-#include "organizmy/Czlowiek.h"
-#include <SFML/Graphics.hpp>
-#include <imgui.h>
-#include <imgui-SFML.h>
-//#include <conio.h>
-using namespace std;
-
+#include "gui/App.h"
 
 int main() {
-    
-
+    Swiat swiat(20, 20);
+    swiat.ustawSwiat();
+    App app(swiat);
+    app.uruchom();
     return 0;
 }

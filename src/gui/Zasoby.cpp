@@ -12,8 +12,8 @@ static std::string plikDlaTypu(TypOrganizmu typ) {
     case TypOrganizmu::Trawa:               return "assets/trawa.png";
     case TypOrganizmu::Mlecz:               return "assets/mlecz.png";
     case TypOrganizmu::Guarana:             return "assets/guarana.png";
-    case TypOrganizmu::WilczeJagody:        return "assets/wilcze_jagody.png";
-    case TypOrganizmu::BarszczSosnowskiego: return "assets/barszcz_sosnowskiego.png";
+    case TypOrganizmu::WilczeJagody:        return "assets/jagody.png";
+    case TypOrganizmu::BarszczSosnowskiego: return "assets/barszcz.png";
     default:                                return "";
     }
 }
