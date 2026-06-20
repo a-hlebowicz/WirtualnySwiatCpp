@@ -33,10 +33,18 @@ void App::przetworzZdarzenia() {
 }
 
 void App::rysujPanel() {
-    ImGui::Begin("Sterowanie");
+    const float panelSzer = 320.f;
+    ImGui::SetNextWindowPos(ImVec2(okno.getSize().x - panelSzer, 0.f));
+    ImGui::SetNextWindowSize(ImVec2(panelSzer, static_cast<float>(okno.getSize().y)));
+    ImGui::Begin("Sterowanie", nullptr,
+        ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
+    
+    naprawImgui();
+    
     ImGui::Text("Tura: %d", swiat.getTura());
     if (ImGui::Button("Nastepna tura"))
         swiat.wykonajTure();
+
     ImGui::End();
 }
 
@@ -52,4 +60,20 @@ void App::uruchom() {
         ImGui::SFML::Render(okno);
         okno.display();
     }
+}
+
+void App::naprawImgui() {
+    // obejœcie dynamicznego atlasu w imgui-sfml 3.0:
+    // trzymamy pe³ny zestaw znaków w atlasie, ¿eby nic nie by³o dorzucane w trakcie
+    static const std::string znaki = [] {
+        std::string s;
+        for (char c = 32; c < 127; ++c) s += c;
+        return s;
+        }();
+
+    float y = ImGui::GetCursorPosY();
+    ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0, 0, 0, 0));
+    ImGui::TextUnformatted(znaki.c_str());
+    ImGui::PopStyleColor();
+    ImGui::SetCursorPosY(y);
 }

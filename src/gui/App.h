@@ -15,4 +15,5 @@ public:
 private:
     void przetworzZdarzenia();
     void rysujPanel();
+    void naprawImgui();
 };

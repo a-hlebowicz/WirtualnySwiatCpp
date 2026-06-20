@@ -1,8 +1,9 @@
 {
-    "name": "wirtualny-swiat",
-    "version": "0.6.0",
-    "dependencies": [
-        "sfml",
-        "imgui-sfml"
-    ]
+  "name": "wirtualny-swiat",
+  "version": "0.6.0",
+  "dependencies": [
+    "sfml",
+    "imgui-sfml"
+  ],
+  "builtin-baseline": "1d48960945c1486511ab905f70f6c78ccb69f9ad"
 }
