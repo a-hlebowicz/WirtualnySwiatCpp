@@ -35,7 +35,7 @@ void Lis::akcja() {
 
 	auto w = zaplanujRuchLis();
 	if (!w) {
-		swiat->komunikat(this, "nie moze sie ruszyc ");
+		swiat->komunikat(this, Zdarzenie::BrakRuchu);
 		return;
 	}
 	auto [dx, dy] = *w;

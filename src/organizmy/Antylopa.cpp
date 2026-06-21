@@ -11,7 +11,7 @@ void Antylopa::kolizja(Organizm* atakujacy)
 	else {
 		if (!swiat->czySasiadujaceWolne(getX(), getY()))Zwierze::kolizja(atakujacy);
 		else {
-			swiat->komunikat(atakujacy, "przegania antylope");
+			swiat->komunikat(atakujacy, Zdarzenie::Przegnanie, this);
 			swiat->przegonOrganizm(atakujacy, this);
 			
 		}

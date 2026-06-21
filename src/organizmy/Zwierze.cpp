@@ -37,7 +37,7 @@ void Zwierze::akcja() {
 
 	auto w = zaplanujRuch();
 	if (!w) {
-		swiat->komunikat(this, "nie moze sie ruszyc ");
+		swiat->komunikat(this, Zdarzenie::BrakRuchu);
 		return;
 	}
 	auto [dx, dy] = *w;
@@ -52,16 +52,14 @@ void Zwierze::kolizja(Organizm* atakujacy) {
 		auto pole = swiat->znajdzWolnePole(this);	
 		if (!pole) return;	
 		swiat->dodajOrganizm(getTyp(), pole->x,  pole->y);
-		swiat->komunikat(this, "sie rozmnozyl");	
+		swiat->komunikat(this, Zdarzenie::Rozmnozenie);	
 	}
 	else if (atakujacy->getSila() >= this->getSila()) {
-		swiat->komunikat(atakujacy, "atakuje ");
-		swiat->komunikat(this, "przegrywa ");
+		swiat->komunikat(atakujacy, Zdarzenie::Pokonanie, this);
 		swiat->zastapOrganizm(atakujacy, this);
 	}
 	else {
-		swiat->komunikat(atakujacy, "atakuje ");
-		swiat->komunikat(this, "wygrywa ");
+		swiat->komunikat(this, Zdarzenie::Pokonanie, atakujacy);
 		swiat->usunOrganizm(atakujacy);
 	}
 }

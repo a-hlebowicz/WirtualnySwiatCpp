@@ -8,14 +8,12 @@ void Guarana::kolizja(Organizm* inny)
 		return;
 	if (getSila() > inny->getSila())
 	{
-		swiat->komunikat(inny, "atakuje ");
-		swiat->komunikat(this, "wygrywa ");
+		swiat->komunikat(this, Zdarzenie::Pokonanie, inny);
 		swiat->usunOrganizm(inny);
 	}
 	else if (getSila() < inny->getSila())
 	{
-		swiat->komunikat(inny, "atakuje ");
-		swiat->komunikat(this, "przegrywa ");
+		swiat->komunikat(inny, Zdarzenie::Pokonanie, this);
 		inny->setSila(inny->getSila() + 3);
 		swiat->zastapOrganizm(inny, this);
 	}

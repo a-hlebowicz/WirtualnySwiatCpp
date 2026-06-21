@@ -3,6 +3,7 @@
 #include <imgui.h>
 #include <imgui-SFML.h>
 #include <SFML/System/Clock.hpp>
+#include "Teksty.h"
 
 static sf::VideoMode trybDla(const Swiat& swiat, int kafelek) {
     return sf::VideoMode({ static_cast<unsigned>(swiat.getSzerokosc() * kafelek + 320),
@@ -44,6 +45,16 @@ void App::rysujPanel() {
     ImGui::Text("Tura: %d", swiat.getTura());
     if (ImGui::Button("Nastepna tura"))
         swiat.wykonajTure();
+
+    ImGui::Separator();
+    ImGui::TextUnformatted("Logi:");
+    ImGui::BeginChild("logi", ImVec2(0, 0), true);   // przewijany
+    for (const Komunikat& k : swiat.getKomunikaty())
+        ImGui::TextUnformatted(tekstKomunikatu(k).c_str());
+    if (ImGui::GetScrollY() >= ImGui::GetScrollMaxY())
+        ImGui::SetScrollHereY(1.0f);                   // zostañ na dole, gdy dochodz¹ wpisy
+    ImGui::EndChild();
+
 
     ImGui::End();
 }

@@ -22,7 +22,7 @@ add_library(swiat_logika STATIC
     src/organizmy/BarszczSosnowskiego.cpp
     src/swiat/Swiat.cpp
     src/swiat/Rng.cpp
-)
+ "src/gui/Teksty.cpp")
 target_include_directories(swiat_logika PUBLIC src)
 
 
@@ -34,7 +34,7 @@ add_executable(WirtualnySwiat
     src/gui/App.cpp
     src/gui/Renderer.cpp
     src/gui/Zasoby.cpp
-)
+ "src/gui/Teksty.cpp")
 target_link_libraries(WirtualnySwiat PRIVATE
     swiat_logika
     SFML::Graphics

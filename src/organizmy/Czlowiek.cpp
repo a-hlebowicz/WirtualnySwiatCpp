@@ -15,7 +15,7 @@ void Czlowiek::akcja()
 		if (umiejetnosc > 5) napis += std::to_string(umiejetnosc - 5) + " tur umiejetnosci";
 		else napis += std::to_string(umiejetnosc) + " do odnowienia umiejetnosci";
 		
-		swiat->komunikat(this, napis);
+		//swiat->komunikat(this, napis);
 	}
 	if (getWiek() == 0) {
 		postarzWiek();
@@ -25,7 +25,7 @@ void Czlowiek::akcja()
 	Kierunek kierunek = wybierzKierunekCzlowiek(wejscie);
 	
 	if (kierunek == Kierunek::brak) {
-		swiat->komunikat(this, "nie moze sie ruszyc ");
+		swiat->komunikat(this, Zdarzenie::BrakRuchu);
 		return;
 	}
 
@@ -33,7 +33,10 @@ void Czlowiek::akcja()
 	int dx = getX() + w.x;
 	int dy = getY() + w.y;
 
-	if (!swiat->czyRuchMozliwy(dx, dy)){swiat->komunikat(this,"Czlowiek chce wyjsc poza plansze ");return; }
+	if (!swiat->czyRuchMozliwy(dx, dy)){
+		swiat->komunikat(this,Zdarzenie::BrakRuchu);
+		return;
+	}
 
 	Organizm* inny = swiat->getOrganizmZMapy(dx, dy);
 	if (inny == nullptr) swiat->przestawOrganizm(this, dx, dy);
@@ -64,7 +67,7 @@ void Czlowiek::kolizja(Organizm* atakujacy) {
 	if (!czyTarczaAktywna()) Zwierze::kolizja(atakujacy);
 	else {
 		swiat->tarczaPrzegon(atakujacy, this);
-		swiat->komunikat(this, "przegania tarcza ");
+		swiat->komunikat(this, Zdarzenie::Przegnanie);
 	}
 }
 bool Czlowiek::czyTarczaAktywna() const { 

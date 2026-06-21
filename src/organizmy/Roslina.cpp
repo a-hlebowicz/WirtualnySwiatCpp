@@ -16,21 +16,19 @@ void Roslina::akcja() {
 	auto pole = swiat->znajdzWolnePole(this);
 	if (!pole) return;
 	swiat->dodajOrganizm(this->getTyp(), pole->x, pole->y);
-	swiat->komunikat(this, "sie rozprzestrzenil");
+	swiat->komunikat(this, Zdarzenie::Rozprzestrzenienie);
 }
 void Roslina::kolizja(Organizm* inny) {
 	if (this == inny)
 		return;
 	if (getSila() > inny->getSila())
 	{
-		swiat->komunikat(inny, "atakuje ");
-		swiat->komunikat(this, "wygrywa ");
+		swiat->komunikat(this, Zdarzenie::Pokonanie, inny);
 		swiat->usunOrganizm(inny);
 	}
 	else if (getSila() < inny->getSila())
 	{
-		swiat->komunikat(inny, "atakuje ");
-		swiat->komunikat(this, "przegrywa ");
+		swiat->komunikat(inny, Zdarzenie::Pokonanie, this);
 		swiat->zastapOrganizm(inny, this);
 	}
 }

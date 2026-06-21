@@ -301,20 +301,11 @@ bool Swiat::czyCzlowiekZTarcza() const {
 //=============================
 
 
-void Swiat::komunikat(Organizm* organizm, std::string text) {
-	std::string napis;
-	napis = organizm->getSymbol();
-	text = ":" + text;
-	napis = napis + text;
-	komunikaty.push(napis);
-}
-
-void Swiat::wyswietlKomunikaty()
-{
-	while (!komunikaty.empty()) {
-		std::cout << komunikaty.front() << std::endl;
-		komunikaty.pop();
-	}
+void Swiat::komunikat(Organizm* o, Zdarzenie co, Organizm* cel) {
+	std::optional<TypOrganizmu> kogo;
+	if (cel) kogo = cel->getTyp();
+	komunikaty.push_back({ o->getTyp(), co, kogo });
+	if (komunikaty.size() > MAX_LOGOW) komunikaty.pop_front();
 }
 
 //================================

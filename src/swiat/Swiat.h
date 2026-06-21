@@ -8,7 +8,7 @@
 #include <queue>
 #include <conio.h>
 #include <random>
-#include <optional>
+#include <deque>
 #include <algorithm>
 struct koordynaty2 { //nie dzialalo dla zwyklych koordynatow
 	int x;
@@ -26,9 +26,11 @@ private:
 	std::vector< std::vector< Organizm* > > mapaOrganizmow;
 	std::list<std::unique_ptr<Organizm>> listaOrganizmow;
 	std::queue<Organizm*> doUsuniecia;	
-	std::queue<std::string> komunikaty;
+	//std::queue<std::string> komunikaty;
 	friend std::ostream& operator<<(std::ostream& out, const Swiat& swiat);	
 	Czlowiek* czlowiek;
+	std::deque<Komunikat> komunikaty;
+	static constexpr std::size_t MAX_LOGOW = 1000;
 public:
 	
 	Swiat(int szerokosc, int wysokosc);
@@ -38,6 +40,7 @@ public:
 	int getWysokosc() const { return wysokosc; }
 	int getTura() const { return tura; }
 	const std::vector< std::vector< Organizm* > >& getMapaOrganizmow() const { return mapaOrganizmow; }
+	const std::deque<Komunikat>& getKomunikaty() const { return komunikaty; }
 	Organizm* getOrganizmZMapy(int x, int y) const;
 	//std::list<std::unique_ptr<Organizm>>& getListaOrganizmow() const { return listaOrganizmow; }; nikt tego i tak nie uzywa?
 	void ustawSwiat(); 
@@ -53,8 +56,8 @@ public:
 	bool czyPoleWolne(int x, int y) const;
 	bool czyWPlanszy(int x, int y) const;
 	bool czySasiadujaceWolne(int x, int y, int predkosc = 1)const;
-	void komunikat(Organizm* organizm, std::string text);
-	void wyswietlKomunikaty();
+	//void komunikat(Organizm* organizm, std::string text);
+	//void wyswietlKomunikaty();
 	void zastapOrganizm(Organizm* atakujacy, Organizm* broniacy);
 	bool jestZwierzeciem(Organizm* organizm);
 	//void komunikat(Organizm* organizm, std::string text, Organizm* organizm2, std::strin text2);
@@ -65,4 +68,5 @@ public:
 	void czlowiekUmiejetnosc();
 	void czlowiekSetWejscie(char c);
 	bool czyCzlowiekZTarcza() const;
+	void komunikat(Organizm* o, Zdarzenie co, Organizm* cel = nullptr);
 };

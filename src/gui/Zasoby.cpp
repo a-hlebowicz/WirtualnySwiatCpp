@@ -30,3 +30,5 @@ const sf::Texture* Zasoby::teksturaDla(TypOrganizmu typ) const {
     auto it = tekstury.find(typ);
     return it == tekstury.end() ? nullptr : &it->second;
 }
+
+

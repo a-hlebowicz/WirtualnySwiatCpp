@@ -15,8 +15,7 @@ void BarszczSosnowskiego::akcja(){
 		if (swiat->czyRuchMozliwy(getX() + x1, getY() + y1)
 			&& swiat->jestZwierzeciem( swiat->getMapaOrganizmow()[getX() + x1][getY() + y1])) {
 			Organizm* inny = swiat->getMapaOrganizmow()[getX() + x1][getY() + y1];
-			swiat->komunikat(this, "atakuje ");
-			swiat->komunikat(inny, "zatruty ");
+			swiat->komunikat(this, Zdarzenie::Zatrucie, inny);
 			swiat->usunOrganizm(inny);
 		}
 	}

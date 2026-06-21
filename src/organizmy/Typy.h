@@ -1,6 +1,7 @@
 #pragma once
 #include <stdexcept>
 #include <array>
+#include <optional>
 enum class Kierunek {
 	brak,
 	lewo,
@@ -49,6 +50,22 @@ inline constexpr std::array wszystkieTypy = {
 struct koordynaty {
 	int x;
 	int y;
+};
+
+enum class Zdarzenie {
+	Pokonanie,
+	Rozmnozenie,
+	Rozprzestrzenienie,
+	BrakRuchu,
+	Zatrucie,
+	Przegnanie,
+	AtakOdparty      
+};
+
+struct Komunikat {
+	TypOrganizmu kto;
+	Zdarzenie    co;
+	std::optional<TypOrganizmu> kogo;
 };
 
 char typNaZnak(TypOrganizmu t);
