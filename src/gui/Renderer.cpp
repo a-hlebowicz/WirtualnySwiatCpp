@@ -9,9 +9,13 @@ void Renderer::rysuj(sf::RenderWindow& okno, const Swiat& swiat) const {
         for (int y = 1; y <= swiat.getWysokosc(); ++y) {
             Organizm* org = swiat.getOrganizmZMapy(x, y);
             if (org == nullptr) continue;
-
-            const sf::Texture* tex = zasoby.teksturaDla(org->getTyp());
+            const sf::Texture* tex;
+            if (org->getTyp() == TypOrganizmu::Czlowiek && swiat.czyCzlowiekZTarcza())
+                tex = zasoby.teksturaCzlowiekZTarcza();
+            else
+                tex = zasoby.teksturaDla(org->getTyp());
             if (tex == nullptr) continue;
+            
 
             sf::Vector2u rozmiar = tex->getSize();
             sf::Sprite sprite(*tex);

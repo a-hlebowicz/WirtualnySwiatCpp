@@ -66,7 +66,8 @@ public:
 	void wczytajPlik(std::string& nazwaPliku, Organizm* czlowiek);
 	bool czyCzlowiekZyje() const;
 	void czlowiekUmiejetnosc();
-	void czlowiekSetWejscie(char c);
+	void czlowiekSetKierunek(Kierunek k);
 	bool czyCzlowiekZTarcza() const;
 	void komunikat(Organizm* o, Zdarzenie co, Organizm* cel = nullptr);
+	bool czlowiekUmiejetnoscGotowa();
 };

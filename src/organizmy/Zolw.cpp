@@ -12,7 +12,7 @@ void Zolw::akcja()
 void Zolw::kolizja(Organizm* organizm)
 {
 	if (organizm->getSila() < 5 && organizm->getTyp() != getTyp()) {
-		swiat->komunikat(organizm, Zdarzenie::AtakOdparty, this);
+		swiat->komunikat(this, Zdarzenie::AtakOdparty, organizm);
 	}
 	else Zwierze::kolizja(organizm);
 }

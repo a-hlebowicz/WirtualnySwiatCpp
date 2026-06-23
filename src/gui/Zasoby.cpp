@@ -32,3 +32,4 @@ const sf::Texture* Zasoby::teksturaDla(TypOrganizmu typ) const {
 }
 
 
+

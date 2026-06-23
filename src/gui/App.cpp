@@ -4,10 +4,21 @@
 #include <imgui-SFML.h>
 #include <SFML/System/Clock.hpp>
 #include "Teksty.h"
+#include <SFML/Window/Keyboard.hpp>
 
 static sf::VideoMode trybDla(const Swiat& swiat, int kafelek) {
     return sf::VideoMode({ static_cast<unsigned>(swiat.getSzerokosc() * kafelek + 320),
                            static_cast<unsigned>(swiat.getWysokosc() * kafelek) });
+}
+
+static Kierunek kierunekZKlawisza(sf::Keyboard::Key k) {
+    switch (k) {
+    case sf::Keyboard::Key::W: case sf::Keyboard::Key::Up:    return Kierunek::gora;
+    case sf::Keyboard::Key::S: case sf::Keyboard::Key::Down:  return Kierunek::dol;
+    case sf::Keyboard::Key::A: case sf::Keyboard::Key::Left:  return Kierunek::lewo;
+    case sf::Keyboard::Key::D: case sf::Keyboard::Key::Right: return Kierunek::prawo;
+    default: return Kierunek::brak;
+    }
 }
 
 App::App(Swiat& swiat, int kafelek)
@@ -30,6 +41,23 @@ void App::przetworzZdarzenia() {
         ImGui::SFML::ProcessEvent(okno, *event);
         if (event->is<sf::Event::Closed>())
             okno.close();
+
+        if (const auto* klaw = event->getIf<sf::Event::KeyPressed>()) {
+            if (klaw->code == sf::Keyboard::Key::Space) {
+                swiat.czlowiekSetKierunek(Kierunek::brak);
+                swiat.wykonajTure();
+            }
+            else if (klaw->code == sf::Keyboard::Key::R) {
+                swiat.czlowiekUmiejetnosc();
+            }
+            else {
+                Kierunek k = kierunekZKlawisza(klaw->code);
+                if (k != Kierunek::brak) {
+                    swiat.czlowiekSetKierunek(k);
+                    swiat.wykonajTure();
+                }
+            }
+        }
     }
 }
 
@@ -43,16 +71,29 @@ void App::rysujPanel() {
     naprawImgui();
     
     ImGui::Text("Tura: %d", swiat.getTura());
-    if (ImGui::Button("Nastepna tura"))
-        swiat.wykonajTure();
+
+    if (ImGui::Button("Nastepna tura")) swiat.wykonajTure();
+
+    if (swiat.czyCzlowiekZyje()) {
+        float bw = ImGui::CalcTextSize("Tarcza").x
+            + ImGui::GetStyle().FramePadding.x * 2.0f;
+        ImGui::SameLine(ImGui::GetWindowWidth() - bw
+            - ImGui::GetStyle().WindowPadding.x);
+
+        bool gotowa = swiat.czlowiekUmiejetnoscGotowa();
+        if (!gotowa) ImGui::BeginDisabled();
+        if (ImGui::Button("Tarcza"))
+            swiat.czlowiekUmiejetnosc();
+        if (!gotowa) ImGui::EndDisabled();
+    }
 
     ImGui::Separator();
     ImGui::TextUnformatted("Logi:");
-    ImGui::BeginChild("logi", ImVec2(0, 0), true);   // przewijany
+    ImGui::BeginChild("logi", ImVec2(0, 0), true);
     for (const Komunikat& k : swiat.getKomunikaty())
         ImGui::TextUnformatted(tekstKomunikatu(k).c_str());
     if (ImGui::GetScrollY() >= ImGui::GetScrollMaxY())
-        ImGui::SetScrollHereY(1.0f);                   // zostañ na dole, gdy dochodz¹ wpisy
+        ImGui::SetScrollHereY(1.0f);
     ImGui::EndChild();
 
 
@@ -74,8 +115,6 @@ void App::uruchom() {
 }
 
 void App::naprawImgui() {
-    // obejœcie dynamicznego atlasu w imgui-sfml 3.0:
-    // trzymamy pe³ny zestaw znaków w atlasie, ¿eby nic nie by³o dorzucane w trakcie
     static const std::string znaki = [] {
         std::string s;
         for (char c = 32; c < 127; ++c) s += c;

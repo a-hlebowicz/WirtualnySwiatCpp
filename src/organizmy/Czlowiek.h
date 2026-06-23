@@ -5,12 +5,11 @@ static constexpr int PROG_TARCZY = 6;
 class Czlowiek :
     public Zwierze
 {
-    Kierunek kierunek;
-    char wejscie;
-    int umiejetnosc;
+    Kierunek wejscie = Kierunek::brak;
+    int umiejetnosc = 0;
 public: Czlowiek(Swiat* swiat, Rng& rng, int x, int y);
       void akcja();
-      Kierunek wybierzKierunekCzlowiek(char wejscie);
+      void setKierunek(Kierunek k);
       void setWejscie(char c);
       void aktywujUmietnosc();
       int getUmiejetnosc();

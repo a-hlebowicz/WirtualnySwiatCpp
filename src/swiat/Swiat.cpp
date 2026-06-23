@@ -288,9 +288,9 @@ void Swiat::czlowiekUmiejetnosc() {
 	return;
 }
 
-void Swiat::czlowiekSetWejscie(char c) {
+void Swiat::czlowiekSetKierunek(Kierunek k) {
 	if (!czyCzlowiekZyje()) return;
-	czlowiek->setWejscie(c);
+	czlowiek->setKierunek(k);
 }
 
 bool Swiat::czyCzlowiekZTarcza() const {
@@ -308,6 +308,10 @@ void Swiat::komunikat(Organizm* o, Zdarzenie co, Organizm* cel) {
 	if (komunikaty.size() > MAX_LOGOW) komunikaty.pop_front();
 }
 
+bool Swiat::czlowiekUmiejetnoscGotowa() {
+	if (czlowiek->getUmiejetnosc() == 0)return true;
+	return false;
+}
 //================================
 
 //void Swiat::zapiszDoPliku() {
